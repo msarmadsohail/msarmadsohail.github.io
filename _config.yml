@@ -1,0 +1,48 @@
+title: "Muhammad Sarmad Sohail"
+name: "Muhammad Sarmad Sohail"
+description: "Data Engineer | Machine Learning Engineer"
+logo: "/assets/img/profile.jpg"
+
+# Theme
+remote_theme: "mmistakes/minimal-mistakes@4.24.0"
+
+plugins:
+  - jekyll-include-cache
+  - jekyll-seo-tag
+  - jekyll-feed
+  - jekyll-sitemap
+
+# Markdown Settings
+markdown: kramdown
+highlighter: rouge
+
+# Build Settings
+paginate: 6
+paginate_path: "/page:num/"
+
+# Social Links
+author:
+  name: "Muhammad Sarmad Sohail"
+  bio: "Data Engineer | Machine Learning Engineer | Reinforcement Learning | PySpark | FastAPI"
+  avatar: "/assets/img/profile.jpg"
+  links:
+    - label: "Email"
+      icon: "fas fa-envelope"
+      url: "mailto:msarmadsohail@gmail.com"
+    - label: "GitHub"
+      icon: "fab fa-github"
+      url: "https://github.com/msarmadsohail"
+    - label: "LinkedIn"
+      icon: "fab fa-linkedin"
+      url: "https://linkedin.com/in/msarmadsohail"
+
+# Navigation
+nav:
+  - title: "Home"
+    url: /
+  - title: "About"
+    url: /about/
+  - title: "Projects"
+    url: /projects/
+  - title: "Research"
+    url: /research/

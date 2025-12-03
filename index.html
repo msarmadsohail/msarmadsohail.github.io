@@ -1,0 +1,650 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Muhammad Sarmad Sohail | Data Engineer & ML Engineer</title>
+    
+    <!-- Fonts -->
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+    
+    <!-- GSAP & ScrollTrigger -->
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.2/gsap.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.2/ScrollTrigger.min.js"></script>
+    
+    <!-- AOS -->
+    <link href="https://unpkg.com/aos@2.3.1/dist/aos.css" rel="stylesheet">
+    <script src="https://unpkg.com/aos@2.3.1/dist/aos.js"></script>
+    
+    <style>
+        :root {
+            --navy: #1e3a8a;
+            --burgundy: #991b1b;
+            --light-bg: #f8fafc;
+            --dark-text: #1e293b;
+            --gray-text: #64748b;
+            --white: #ffffff;
+        }
+        
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+        
+        body {
+            font-family: 'Inter', sans-serif;
+            color: var(--dark-text);
+            line-height: 1.6;
+            overflow-x: hidden;
+        }
+        
+        /* Navbar */
+        nav {
+            position: fixed;
+            top: 0;
+            width: 100%;
+            background: rgba(255, 255, 255, 0.95);
+            backdrop-filter: blur(10px);
+            padding: 1rem 0;
+            z-index: 1000;
+            box-shadow: 0 2px 10px rgba(0,0,0,0.05);
+        }
+        
+        nav .container {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 0 2rem;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+        
+        nav .logo {
+            font-size: 1.5rem;
+            font-weight: 700;
+            color: var(--navy);
+        }
+        
+        nav ul {
+            display: flex;
+            list-style: none;
+            gap: 2rem;
+        }
+        
+        nav a {
+            text-decoration: none;
+            color: var(--dark-text);
+            font-weight: 500;
+            transition: color 0.3s;
+        }
+        
+        nav a:hover {
+            color: var(--burgundy);
+        }
+        
+        /* Hero Section */
+        #hero {
+            height: 100vh;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            background: linear-gradient(135deg, var(--light-bg) 0%, #e0e7ff 100%);
+            position: relative;
+            overflow: hidden;
+        }
+        
+        .hero-content {
+            text-align: center;
+            z-index: 10;
+        }
+        
+        .profile-photo {
+            width: 200px;
+            height: 200px;
+            border-radius: 50%;
+            margin: 0 auto 2rem;
+            border: 5px solid var(--white);
+            box-shadow: 0 20px 60px rgba(0,0,0,0.15);
+            object-fit: cover;
+            transform-origin: center;
+        }
+        
+        .hero-content h1 {
+            font-size: 3.5rem;
+            font-weight: 700;
+            color: var(--navy);
+            margin-bottom: 0.5rem;
+        }
+        
+        .hero-content .title {
+            font-size: 1.5rem;
+            color: var(--burgundy);
+            font-weight: 500;
+            margin-bottom: 1rem;
+        }
+        
+        .hero-content .tagline {
+            font-size: 1.25rem;
+            color: var(--gray-text);
+            margin-bottom: 2rem;
+            max-width: 600px;
+            margin-left: auto;
+            margin-right: auto;
+        }
+        
+        .cta-buttons {
+            display: flex;
+            gap: 1rem;
+            justify-content: center;
+            flex-wrap: wrap;
+        }
+        
+        .btn {
+            padding: 0.75rem 1.5rem;
+            border-radius: 8px;
+            text-decoration: none;
+            font-weight: 600;
+            transition: all 0.3s;
+            display: inline-block;
+        }
+        
+        .btn-primary {
+            background: var(--navy);
+            color: var(--white);
+        }
+        
+        .btn-primary:hover {
+            background: var(--burgundy);
+            transform: translateY(-2px);
+            box-shadow: 0 10px 25px rgba(153, 27, 27, 0.3);
+        }
+        
+        .btn-secondary {
+            background: transparent;
+            color: var(--navy);
+            border: 2px solid var(--navy);
+        }
+        
+        .btn-secondary:hover {
+            background: var(--navy);
+            color: var(--white);
+            transform: translateY(-2px);
+        }
+        
+        /* Section Styling */
+        section {
+            padding: 5rem 0;
+        }
+        
+        .container {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 0 2rem;
+        }
+        
+        .section-title {
+            font-size: 2.5rem;
+            font-weight: 700;
+            color: var(--navy);
+            margin-bottom: 3rem;
+            text-align: center;
+        }
+        
+        /* About Section */
+        #about {
+            background: var(--white);
+        }
+        
+        .about-content {
+            max-width: 800px;
+            margin: 0 auto;
+            text-align: center;
+        }
+        
+        .about-content p {
+            font-size: 1.125rem;
+            color: var(--gray-text);
+            margin-bottom: 1.5rem;
+            line-height: 1.8;
+        }
+        
+        .tech-stack {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 1rem;
+            justify-content: center;
+            margin-top: 2rem;
+        }
+        
+        .tech-badge {
+            padding: 0.5rem 1rem;
+            background: var(--light-bg);
+            border: 2px solid var(--navy);
+            border-radius: 20px;
+            font-weight: 600;
+            color: var(--navy);
+            transition: all 0.3s;
+        }
+        
+        .tech-badge:hover {
+            background: var(--navy);
+            color: var(--white);
+            transform: translateY(-3px);
+        }
+        
+        /* Projects Section */
+        #projects {
+            background: var(--light-bg);
+        }
+        
+        .projects-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            gap: 2rem;
+        }
+        
+        .project-card {
+            background: var(--white);
+            border-radius: 12px;
+            padding: 2rem;
+            box-shadow: 0 4px 20px rgba(0,0,0,0.08);
+            transition: all 0.3s;
+            border-top: 4px solid var(--burgundy);
+        }
+        
+        .project-card:hover {
+            transform: translateY(-10px);
+            box-shadow: 0 12px 40px rgba(0,0,0,0.15);
+        }
+        
+        .project-card h3 {
+            font-size: 1.5rem;
+            color: var(--navy);
+            margin-bottom: 1rem;
+        }
+        
+        .project-card p {
+            color: var(--gray-text);
+            margin-bottom: 1.5rem;
+            line-height: 1.7;
+        }
+        
+        .project-tags {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 0.5rem;
+            margin-bottom: 1.5rem;
+        }
+        
+        .tag {
+            padding: 0.25rem 0.75rem;
+            background: var(--light-bg);
+            color: var(--navy);
+            border-radius: 12px;
+            font-size: 0.875rem;
+            font-weight: 500;
+        }
+        
+        .project-links {
+            display: flex;
+            gap: 1rem;
+            flex-wrap: wrap;
+        }
+        
+        .project-link {
+            color: var(--burgundy);
+            text-decoration: none;
+            font-weight: 600;
+            transition: color 0.3s;
+        }
+        
+        .project-link:hover {
+            color: var(--navy);
+        }
+        
+        /* Publications Section */
+        #publications {
+            background: var(--white);
+        }
+        
+        .publication-card {
+            max-width: 900px;
+            margin: 0 auto;
+            background: var(--light-bg);
+            border-radius: 12px;
+            padding: 2.5rem;
+            border-left: 6px solid var(--burgundy);
+        }
+        
+        .publication-card h3 {
+            font-size: 1.75rem;
+            color: var(--navy);
+            margin-bottom: 1rem;
+        }
+        
+        .publication-card .authors {
+            color: var(--gray-text);
+            margin-bottom: 0.5rem;
+            font-style: italic;
+        }
+        
+        .publication-card .venue {
+            color: var(--burgundy);
+            font-weight: 600;
+            margin-bottom: 1rem;
+        }
+        
+        .publication-card p {
+            color: var(--gray-text);
+            line-height: 1.7;
+            margin-bottom: 1.5rem;
+        }
+        
+        /* Contact Section */
+        #contact {
+            background: linear-gradient(135deg, var(--navy) 0%, #1e293b 100%);
+            color: var(--white);
+            text-align: center;
+        }
+        
+        #contact .section-title {
+            color: var(--white);
+        }
+        
+        .contact-info {
+            max-width: 600px;
+            margin: 0 auto;
+        }
+        
+        .contact-info p {
+            font-size: 1.125rem;
+            margin-bottom: 2rem;
+            opacity: 0.9;
+        }
+        
+        .social-links {
+            display: flex;
+            gap: 1.5rem;
+            justify-content: center;
+            flex-wrap: wrap;
+        }
+        
+        .social-link {
+            display: inline-block;
+            padding: 0.75rem 1.5rem;
+            background: rgba(255,255,255,0.1);
+            border: 2px solid var(--white);
+            border-radius: 8px;
+            color: var(--white);
+            text-decoration: none;
+            font-weight: 600;
+            transition: all 0.3s;
+        }
+        
+        .social-link:hover {
+            background: var(--burgundy);
+            border-color: var(--burgundy);
+            transform: translateY(-3px);
+        }
+        
+        /* Footer */
+        footer {
+            background: #0f172a;
+            color: var(--white);
+            text-align: center;
+            padding: 2rem 0;
+        }
+        
+        footer p {
+            opacity: 0.7;
+        }
+        
+        /* Responsive */
+        @media (max-width: 768px) {
+            nav ul {
+                gap: 1rem;
+                font-size: 0.875rem;
+            }
+            
+            .hero-content h1 {
+                font-size: 2.5rem;
+            }
+            
+            .hero-content .title {
+                font-size: 1.25rem;
+            }
+            
+            .profile-photo {
+                width: 150px;
+                height: 150px;
+            }
+            
+            .section-title {
+                font-size: 2rem;
+            }
+            
+            .projects-grid {
+                grid-template-columns: 1fr;
+            }
+        }
+    </style>
+</head>
+<body>
+    <!-- Navigation -->
+    <nav>
+        <div class="container">
+            <div class="logo">MS</div>
+            <ul>
+                <li><a href="#about">About</a></li>
+                <li><a href="#projects">Projects</a></li>
+                <li><a href="#publications">Publications</a></li>
+                <li><a href="#contact">Contact</a></li>
+            </ul>
+        </div>
+    </nav>
+
+    <!-- Hero Section -->
+    <section id="hero">
+        <div class="hero-content">
+            <img src="assets/images/profile.jpg" alt="Muhammad Sarmad Sohail" class="profile-photo" id="profilePhoto">
+            <h1>Muhammad Sarmad Sohail</h1>
+            <p class="title">Data Engineer | Machine Learning Engineer</p>
+            <p class="tagline">Building scalable data pipelines and intelligent systems</p>
+            <div class="cta-buttons">
+                <a href="https://github.com/msarmadsohail" class="btn btn-primary" target="_blank">GitHub</a>
+                <a href="https://linkedin.com/in/msarmadsohail" class="btn btn-primary" target="_blank">LinkedIn</a>
+                <a href="https://scholar.google.com/citations?user=3DpcXZMAAAAJ" class="btn btn-secondary" target="_blank">Google Scholar</a>
+                <a href="assets/docs/M_SARMAD_SOHAIL_CV.pdf" class="btn btn-secondary" download>Download CV</a>
+            </div>
+        </div>
+    </section>
+
+    <!-- About Section -->
+    <section id="about">
+        <div class="container">
+            <h2 class="section-title" data-aos="fade-up">About Me</h2>
+            <div class="about-content" data-aos="fade-up" data-aos-delay="100">
+                <p>Data Engineer at Adept Tech Solutions with expertise in building scalable ETL pipelines and synthetic data platforms using PySpark and FastAPI. Published researcher in deep reinforcement learning for IoT networks (IEEE WCNC 2024). Background in electrical engineering from NUST with specialization in machine learning and IC design.</p>
+                <p>Passionate about leveraging data engineering and ML to solve complex problems at scale. Experienced in deep reinforcement learning, generative AI, and distributed computing.</p>
+                
+                <div class="tech-stack">
+                    <span class="tech-badge">Python</span>
+                    <span class="tech-badge">PySpark</span>
+                    <span class="tech-badge">FastAPI</span>
+                    <span class="tech-badge">TensorFlow</span>
+                    <span class="tech-badge">PyTorch</span>
+                    <span class="tech-badge">LangChain</span>
+                    <span class="tech-badge">SQL</span>
+                    <span class="tech-badge">Docker</span>
+                    <span class="tech-badge">Git</span>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Projects Section -->
+    <section id="projects">
+        <div class="container">
+            <h2 class="section-title" data-aos="fade-up">Featured Projects</h2>
+            <div class="projects-grid">
+                <!-- Project 1: IEEE WCNC 2024 -->
+                <div class="project-card" data-aos="fade-up" data-aos-delay="100">
+                    <h3>Optimizing Resource Allocation in MEC-NOMA Networks</h3>
+                    <p>Deep Reinforcement Learning framework for dynamic resource allocation in energy-harvesting IoT networks using Mobile Edge Computing and CR-NOMA.</p>
+                    <div class="project-tags">
+                        <span class="tag">Python</span>
+                        <span class="tag">TensorFlow</span>
+                        <span class="tag">Deep RL</span>
+                        <span class="tag">DDPG</span>
+                    </div>
+                    <div class="project-links">
+                        <a href="https://scholar.google.com/citations?view_op=view_citation&hl=en&user=3DpcXZMAAAAJ&citation_for_view=3DpcXZMAAAAJ:u-x6o8ySG0sC" class="project-link" target="_blank">📄 Paper</a>
+                        <a href="https://drive.google.com/file/d/19qaJNK0aULf1YAteoijH-xRYKmC_4Z6A/view" class="project-link" target="_blank">🎥 Demo</a>
+                        <a href="https://github.com/msarmadsohail/wcnc-2024-mec-noma" class="project-link" target="_blank">💻 GitHub</a>
+                        <a href="https://www.linkedin.com/posts/msarmadsohail_projectcompletion-teamwork-thankyou-activity-7188945182602522626-d8WP" class="project-link" target="_blank">📊 Poster</a>
+                    </div>
+                </div>
+
+                <!-- Project 2: ZeroPhish Gate -->
+                <div class="project-card" data-aos="fade-up" data-aos-delay="200">
+                    <h3>ZeroPhish Gate</h3>
+                    <p>Hybrid AI-powered phishing detection system combining BERT and LLaMA for supply chain security. Top Performer award at Pak Angels GenAI Hackathon.</p>
+                    <div class="project-tags">
+                        <span class="tag">BERT</span>
+                        <span class="tag">LLaMA</span>
+                        <span class="tag">LangChain</span>
+                        <span class="tag">Gradio</span>
+                    </div>
+                    <div class="project-links">
+                        <a href="https://github.com/msarmadsohail/pak-angels-genai-cohort6" class="project-link" target="_blank">💻 GitHub</a>
+                        <a href="https://quiz.ideagist.com/ideagist-certificate/?cert_hash=16d330593ff3496c" class="project-link" target="_blank">🏆 Certificate</a>
+                    </div>
+                </div>
+
+                <!-- Project 3: CNN-LSTM Action Recognition -->
+                <div class="project-card" data-aos="fade-up" data-aos-delay="300">
+                    <h3>CNN-LSTM Human Action Recognition</h3>
+                    <p>Novel Conv2D + LSTM architectures for video-based regression tasks on the UBFC dataset with custom preprocessing and augmentation pipelines.</p>
+                    <div class="project-tags">
+                        <span class="tag">PyTorch</span>
+                        <span class="tag">Keras</span>
+                        <span class="tag">CNN</span>
+                        <span class="tag">LSTM</span>
+                        <span class="tag">Computer Vision</span>
+                    </div>
+                    <div class="project-links">
+                        <a href="https://github.com/msarmadsohail/cnn-lstm-human-action-recognition" class="project-link" target="_blank">💻 GitHub</a>
+                    </div>
+                </div>
+
+                <!-- Project 4: ASCEND Synthetic Data Platform -->
+                <div class="project-card" data-aos="fade-up" data-aos-delay="400">
+                    <h3>ASCEND Synthetic Data Platform</h3>
+                    <p>Production-grade distributed ETL pipelines for data profiling, anonymization, and synthetic data generation using PySpark and FastAPI microservices.</p>
+                    <div class="project-tags">
+                        <span class="tag">PySpark</span>
+                        <span class="tag">FastAPI</span>
+                        <span class="tag">ETL</span>
+                        <span class="tag">Data Engineering</span>
+                    </div>
+                    <div class="project-links">
+                        <span style="color: var(--gray-text); font-style: italic;">Proprietary Work</span>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Publications Section -->
+    <section id="publications">
+        <div class="container">
+            <h2 class="section-title" data-aos="fade-up">Publications</h2>
+            <div class="publication-card" data-aos="fade-up" data-aos-delay="100">
+                <h3>Optimizing Resource Allocation in MEC-Enabled CR-NOMA-Assisted IoT Networks: A DRL-Driven Strategy</h3>
+                <p class="authors">Muhammad Taha Qaiser, <strong>Muhammad Sarmad Sohail</strong>, Minahil Shafqat, Syed Asad Ullah, Haejoon Jung, Syed Ali Hassan</p>
+                <p class="venue">IEEE Wireless Communications & Networking Conference (WCNC) 2024 | Dubai, UAE</p>
+                <p>Proposed a Deep Deterministic Policy Gradient (DDPG) framework to optimize resource allocation in energy-harvesting IoT devices using CR-NOMA and Mobile Edge Computing (MEC). Achieved superior performance over baseline methods with faster convergence and minimized service delay.</p>
+                <div class="project-links">
+                    <a href="https://scholar.google.com/citations?view_op=view_citation&hl=en&user=3DpcXZMAAAAJ&citation_for_view=3DpcXZMAAAAJ:u-x6o8ySG0sC" class="project-link" target="_blank">📄 Read Paper</a>
+                    <a href="https://drive.google.com/file/d/19qaJNK0aULf1YAteoijH-xRYKmC_4Z6A/view" class="project-link" target="_blank">🎥 Demo Video</a>
+                    <a href="https://www.linkedin.com/posts/msarmadsohail_projectcompletion-teamwork-thankyou-activity-7188945182602522626-d8WP" class="project-link" target="_blank">📊 Poster</a>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Contact Section -->
+    <section id="contact">
+        <div class="container">
+            <h2 class="section-title" data-aos="fade-up">Get In Touch</h2>
+            <div class="contact-info" data-aos="fade-up" data-aos-delay="100">
+                <p>Interested in collaborating or discussing opportunities? Feel free to reach out!</p>
+                <div class="social-links">
+                    <a href="mailto:msarmadsohail@gmail.com" class="social-link">Email</a>
+                    <a href="https://linkedin.com/in/msarmadsohail" class="social-link" target="_blank">LinkedIn</a>
+                    <a href="https://github.com/msarmadsohail" class="social-link" target="_blank">GitHub</a>
+                    <a href="https://scholar.google.com/citations?user=3DpcXZMAAAAJ" class="social-link" target="_blank">Google Scholar</a>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Footer -->
+    <footer>
+        <div class="container">
+            <p>&copy; 2025 Muhammad Sarmad Sohail. All rights reserved.</p>
+        </div>
+    </footer>
+
+    <script>
+        // Initialize AOS
+        AOS.init({
+            duration: 1000,
+            once: true,
+            offset: 100
+        });
+
+        // GSAP Animations for Profile Photo
+        gsap.registerPlugin(ScrollTrigger);
+
+        gsap.to("#profilePhoto", {
+            scrollTrigger: {
+                trigger: "#hero",
+                start: "top top",
+                end: "bottom top",
+                scrub: 1
+            },
+            scale: 0.5,
+            y: -100,
+            opacity: 0.3
+        });
+
+        // Smooth scrolling for navigation links
+        document.querySelectorAll('a[href^="#"]').forEach(anchor => {
+            anchor.addEventListener('click', function (e) {
+                e.preventDefault();
+                const target = document.querySelector(this.getAttribute('href'));
+                if (target) {
+                    target.scrollIntoView({
+                        behavior: 'smooth',
+                        block: 'start'
+                    });
+                }
+            });
+        });
+
+        // Navbar background on scroll
+        window.addEventListener('scroll', () => {
+            const nav = document.querySelector('nav');
+            if (window.scrollY > 100) {
+                nav.style.background = 'rgba(255, 255, 255, 0.98)';
+                nav.style.boxShadow = '0 2px 20px rgba(0,0,0,0.1)';
+            } else {
+                nav.style.background = 'rgba(255, 255, 255, 0.95)';
+                nav.style.boxShadow = '0 2px 10px rgba(0,0,0,0.05)';
+            }
+        });
+    </script>
+</body>
+</html>

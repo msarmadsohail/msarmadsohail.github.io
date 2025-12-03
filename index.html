@@ -532,6 +532,367 @@
             50% { transform: translateX(-50%) translateY(10px); }
         }
         
+        /* Projects Section */
+        #projects {
+            padding: 8rem 2rem;
+            position: relative;
+            z-index: 1;
+        }
+        
+        .projects-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(400px, 1fr));
+            gap: 2rem;
+        }
+        
+        .project-card {
+            background: rgba(255, 255, 255, 0.03);
+            border: 1px solid rgba(255, 255, 255, 0.1);
+            border-radius: 20px;
+            padding: 2.5rem;
+            position: relative;
+            overflow: hidden;
+            transition: all 0.4s cubic-bezier(0.23, 1, 0.32, 1);
+        }
+        
+        .project-card::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: linear-gradient(135deg, rgba(59, 130, 246, 0.1), rgba(220, 38, 38, 0.1));
+            opacity: 0;
+            transition: opacity 0.4s;
+        }
+        
+        .project-card:hover::before {
+            opacity: 1;
+        }
+        
+        .project-card:hover {
+            transform: translateY(-10px);
+            border-color: rgba(59, 130, 246, 0.3);
+            box-shadow: 0 20px 60px rgba(59, 130, 246, 0.2);
+        }
+        
+        .project-card.featured {
+            grid-column: span 2;
+            background: linear-gradient(135deg, rgba(59, 130, 246, 0.05), rgba(220, 38, 38, 0.05));
+            border: 2px solid rgba(59, 130, 246, 0.2);
+        }
+        
+        .project-glow {
+            position: absolute;
+            top: -50%;
+            right: -50%;
+            width: 200%;
+            height: 200%;
+            background: radial-gradient(circle, rgba(59, 130, 246, 0.1) 0%, transparent 60%);
+            pointer-events: none;
+        }
+        
+        .project-header {
+            display: flex;
+            gap: 0.75rem;
+            margin-bottom: 1.5rem;
+            position: relative;
+            z-index: 2;
+        }
+        
+        .project-badge {
+            padding: 0.375rem 0.875rem;
+            background: rgba(59, 130, 246, 0.1);
+            border: 1px solid rgba(59, 130, 246, 0.2);
+            border-radius: 50px;
+            font-size: 0.75rem;
+            font-weight: 600;
+            color: var(--accent-blue);
+        }
+        
+        .project-badge.highlight {
+            background: rgba(220, 38, 38, 0.1);
+            border-color: rgba(220, 38, 38, 0.2);
+            color: var(--burgundy-light);
+        }
+        
+        .project-card h3 {
+            font-family: 'Space Grotesk', sans-serif;
+            font-size: 1.75rem;
+            margin-bottom: 1rem;
+            position: relative;
+            z-index: 2;
+        }
+        
+        .project-card p {
+            color: rgba(255, 255, 255, 0.7);
+            line-height: 1.8;
+            margin-bottom: 1.5rem;
+            position: relative;
+            z-index: 2;
+        }
+        
+        .project-tech {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 0.5rem;
+            margin-bottom: 1.5rem;
+            position: relative;
+            z-index: 2;
+        }
+        
+        .tech-tag {
+            padding: 0.375rem 0.875rem;
+            background: rgba(255, 255, 255, 0.05);
+            border: 1px solid rgba(255, 255, 255, 0.1);
+            border-radius: 50px;
+            font-size: 0.875rem;
+            color: rgba(255, 255, 255, 0.8);
+        }
+        
+        .project-links {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 1rem;
+            position: relative;
+            z-index: 2;
+        }
+        
+        .project-links a {
+            color: var(--accent-blue);
+            text-decoration: none;
+            font-weight: 600;
+            transition: color 0.3s;
+        }
+        
+        .project-links a:hover {
+            color: var(--burgundy-light);
+        }
+        
+        .proprietary {
+            color: rgba(255, 255, 255, 0.5);
+            font-style: italic;
+        }
+        
+        /* Publications Section */
+        #publications {
+            padding: 8rem 2rem;
+            position: relative;
+            z-index: 1;
+            background: rgba(255, 255, 255, 0.02);
+        }
+        
+        .publication-showcase {
+            max-width: 1000px;
+            margin: 0 auto;
+        }
+        
+        .publication-card {
+            background: rgba(255, 255, 255, 0.03);
+            border: 1px solid rgba(255, 255, 255, 0.1);
+            border-left: 4px solid var(--burgundy-light);
+            border-radius: 20px;
+            padding: 3rem;
+            display: flex;
+            gap: 2rem;
+            transition: all 0.4s;
+        }
+        
+        .publication-card:hover {
+            transform: translateX(10px);
+            border-left-color: var(--accent-blue);
+            box-shadow: 0 20px 60px rgba(59, 130, 246, 0.15);
+        }
+        
+        .publication-icon {
+            font-size: 3rem;
+            flex-shrink: 0;
+        }
+        
+        .publication-content h3 {
+            font-family: 'Space Grotesk', sans-serif;
+            font-size: 1.75rem;
+            margin-bottom: 1rem;
+            line-height: 1.3;
+        }
+        
+        .publication-meta {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 1rem;
+            margin-bottom: 1rem;
+        }
+        
+        .publication-meta span {
+            padding: 0.375rem 0.875rem;
+            background: rgba(220, 38, 38, 0.1);
+            border: 1px solid rgba(220, 38, 38, 0.2);
+            border-radius: 50px;
+            font-size: 0.875rem;
+            color: var(--burgundy-light);
+            font-weight: 600;
+        }
+        
+        .authors {
+            color: rgba(255, 255, 255, 0.6);
+            font-style: italic;
+            margin-bottom: 1rem;
+            line-height: 1.6;
+        }
+        
+        .authors strong {
+            color: var(--accent-blue);
+            font-style: normal;
+        }
+        
+        .description {
+            color: rgba(255, 255, 255, 0.7);
+            line-height: 1.8;
+            margin-bottom: 1.5rem;
+        }
+        
+        .publication-links {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 1rem;
+        }
+        
+        .publication-links a {
+            padding: 0.75rem 1.5rem;
+            background: rgba(59, 130, 246, 0.1);
+            border: 1px solid rgba(59, 130, 246, 0.2);
+            border-radius: 10px;
+            color: var(--accent-blue);
+            text-decoration: none;
+            font-weight: 600;
+            transition: all 0.3s;
+        }
+        
+        .publication-links a:hover {
+            background: rgba(59, 130, 246, 0.2);
+            transform: translateY(-2px);
+        }
+        
+        /* Contact Section */
+        #contact {
+            padding: 8rem 2rem;
+            position: relative;
+            z-index: 1;
+        }
+        
+        .contact-content {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 4rem;
+            align-items: center;
+        }
+        
+        .contact-left .section-title {
+            text-align: left;
+            margin-bottom: 1.5rem;
+        }
+        
+        .contact-left p {
+            font-size: 1.125rem;
+            color: rgba(255, 255, 255, 0.7);
+            line-height: 1.8;
+            margin-bottom: 3rem;
+        }
+        
+        .contact-info {
+            display: flex;
+            flex-direction: column;
+            gap: 1.5rem;
+        }
+        
+        .info-item {
+            display: flex;
+            align-items: center;
+            gap: 1.5rem;
+            padding: 1.5rem;
+            background: rgba(255, 255, 255, 0.03);
+            border: 1px solid rgba(255, 255, 255, 0.1);
+            border-radius: 15px;
+            transition: all 0.3s;
+        }
+        
+        .info-item:hover {
+            background: rgba(255, 255, 255, 0.05);
+            border-color: rgba(59, 130, 246, 0.3);
+            transform: translateX(10px);
+        }
+        
+        .info-icon {
+            font-size: 2rem;
+        }
+        
+        .info-label {
+            font-size: 0.875rem;
+            color: rgba(255, 255, 255, 0.5);
+            margin-bottom: 0.25rem;
+        }
+        
+        .info-item a {
+            color: var(--white);
+            text-decoration: none;
+            font-weight: 600;
+            font-size: 1.125rem;
+        }
+        
+        .social-grid {
+            display: grid;
+            grid-template-columns: repeat(2, 1fr);
+            gap: 1.5rem;
+        }
+        
+        .social-card {
+            padding: 2rem;
+            background: rgba(255, 255, 255, 0.03);
+            border: 1px solid rgba(255, 255, 255, 0.1);
+            border-radius: 20px;
+            text-align: center;
+            text-decoration: none;
+            transition: all 0.4s cubic-bezier(0.23, 1, 0.32, 1);
+        }
+        
+        .social-card:hover {
+            background: rgba(59, 130, 246, 0.1);
+            border-color: rgba(59, 130, 246, 0.3);
+            transform: translateY(-10px) scale(1.05);
+        }
+        
+        .social-icon {
+            font-size: 3rem;
+            margin-bottom: 1rem;
+        }
+        
+        .social-name {
+            font-family: 'Space Grotesk', sans-serif;
+            font-size: 1.25rem;
+            font-weight: 600;
+            color: var(--white);
+            margin-bottom: 0.5rem;
+        }
+        
+        .social-handle {
+            font-size: 0.875rem;
+            color: rgba(255, 255, 255, 0.6);
+        }
+        
+        /* Footer */
+        footer {
+            padding: 2rem;
+            text-align: center;
+            border-top: 1px solid rgba(255, 255, 255, 0.1);
+            position: relative;
+            z-index: 1;
+        }
+        
+        footer p {
+            color: rgba(255, 255, 255, 0.5);
+        }
+        
         /* Responsive */
         @media (max-width: 1024px) {
             .hero-content {
@@ -548,6 +909,18 @@
             }
             
             .about-grid {
+                grid-template-columns: 1fr;
+            }
+            
+            .projects-grid {
+                grid-template-columns: 1fr;
+            }
+            
+            .project-card.featured {
+                grid-column: span 1;
+            }
+            
+            .contact-content {
                 grid-template-columns: 1fr;
             }
             
@@ -581,6 +954,15 @@
             
             .cta-buttons {
                 justify-content: center;
+            }
+            
+            .publication-card {
+                flex-direction: column;
+                padding: 2rem;
+            }
+            
+            .social-grid {
+                grid-template-columns: 1fr;
             }
         }
     </style>
@@ -625,7 +1007,7 @@
                 <div class="profile-card">
                     <div class="profile-inner">
                         <div class="profile-glass">
-                            <img src="assets/images/profile.jpg" alt="Muhammad Sarmad Sohail" class="profile-photo">
+                            <img src="assets/images/profile.png" alt="Muhammad Sarmad Sohail" class="profile-photo">
                             <div class="profile-info">
                                 <h3>Muhammad Sarmad Sohail</h3>
                                 <p class="role">Data Engineer | ML Engineer</p>
@@ -665,7 +1047,7 @@
                 <div class="about-content">
                     <p>I'm a <span class="highlight-text">Data Engineer</span> at Adept Tech Solutions, where I build scalable ETL pipelines and synthetic data platforms using PySpark and FastAPI. My work focuses on distributed computing, data profiling, and production-grade microservices.</p>
                     
-                    <p>With a background in <span class="highlight-text">Electrical Engineering from NUST</span> (CGPA 3.70/4.00), I've published research at IEEE WCNC 2024 on deep reinforcement learning for IoT networks. I combine strong engineering fundamentals with cutting-edge ML techniques.</p>
+                    <p>With a background in <span class="highlight-text">Electrical Engineering from NUST</span>, I've published research at IEEE WCNC 2024 on deep reinforcement learning for IoT networks. I combine strong engineering fundamentals with cutting-edge ML techniques.</p>
                     
                     <p>Recently earned <span class="highlight-text">Top Performer</span> recognition at the Pak Angels GenAI Hackathon, building AI-powered systems using BERT, LLaMA, and LangChain. I'm passionate about generative AI, RAG systems, and autonomous agents.</p>
                 </div>
@@ -707,6 +1089,200 @@
             </div>
         </div>
     </section>
+
+    <!-- Projects Section -->
+    <section id="projects">
+        <div class="container">
+            <div class="section-header">
+                <div class="section-badge">Portfolio</div>
+                <h2 class="section-title">Featured Projects</h2>
+                <p class="section-subtitle">Building scalable systems and pushing the boundaries of AI</p>
+            </div>
+            
+            <div class="projects-grid">
+                <!-- Project 1: IEEE WCNC 2024 -->
+                <div class="project-card featured">
+                    <div class="project-glow"></div>
+                    <div class="project-header">
+                        <span class="project-badge">Research</span>
+                        <span class="project-badge">Published</span>
+                    </div>
+                    <h3>Resource Allocation in MEC-NOMA Networks</h3>
+                    <p>Deep Reinforcement Learning framework optimizing computation offloading for energy-harvesting IoT devices. Achieved superior performance over baseline methods with faster convergence and minimized service delay.</p>
+                    <div class="project-tech">
+                        <span class="tech-tag">Python</span>
+                        <span class="tech-tag">TensorFlow</span>
+                        <span class="tech-tag">Deep RL</span>
+                        <span class="tech-tag">DDPG</span>
+                    </div>
+                    <div class="project-links">
+                        <a href="https://scholar.google.com/citations?view_op=view_citation&hl=en&user=3DpcXZMAAAAJ&citation_for_view=3DpcXZMAAAAJ:u-x6o8ySG0sC" target="_blank">📄 Paper</a>
+                        <a href="https://drive.google.com/file/d/19qaJNK0aULf1YAteoijH-xRYKmC_4Z6A/view" target="_blank">🎥 Demo</a>
+                        <a href="https://github.com/msarmadsohail/wcnc-2024-mec-noma" target="_blank">💻 Code</a>
+                        <a href="https://www.linkedin.com/posts/msarmadsohail_projectcompletion-teamwork-thankyou-activity-7188945182602522626-d8WP" target="_blank">📊 Poster</a>
+                    </div>
+                </div>
+
+                <!-- Project 2: ZeroPhish Gate -->
+                <div class="project-card">
+                    <div class="project-glow"></div>
+                    <div class="project-header">
+                        <span class="project-badge highlight">🏆 Top Performer</span>
+                    </div>
+                    <h3>ZeroPhish Gate</h3>
+                    <p>Hybrid AI-powered phishing detection combining BERT and LLaMA for supply chain security. Winner of Top Performer award at Pak Angels GenAI Hackathon among competitive cohort.</p>
+                    <div class="project-tech">
+                        <span class="tech-tag">BERT</span>
+                        <span class="tech-tag">LLaMA</span>
+                        <span class="tech-tag">LangChain</span>
+                        <span class="tech-tag">Gradio</span>
+                    </div>
+                    <div class="project-links">
+                        <a href="https://github.com/msarmadsohail/pak-angels-genai-cohort6" target="_blank">💻 Code</a>
+                        <a href="https://quiz.ideagist.com/ideagist-certificate/?cert_hash=16d330593ff3496c" target="_blank">🏆 Certificate</a>
+                    </div>
+                </div>
+
+                <!-- Project 3: CNN-LSTM -->
+                <div class="project-card">
+                    <div class="project-glow"></div>
+                    <div class="project-header">
+                        <span class="project-badge">Computer Vision</span>
+                    </div>
+                    <h3>CNN-LSTM Action Recognition</h3>
+                    <p>Novel Conv2D + LSTM architectures for video-based regression on UBFC dataset. Implemented custom preprocessing pipelines and data augmentation strategies.</p>
+                    <div class="project-tech">
+                        <span class="tech-tag">PyTorch</span>
+                        <span class="tech-tag">Keras</span>
+                        <span class="tech-tag">CNN</span>
+                        <span class="tech-tag">LSTM</span>
+                    </div>
+                    <div class="project-links">
+                        <a href="https://github.com/msarmadsohail/cnn-lstm-human-action-recognition" target="_blank">💻 Code</a>
+                    </div>
+                </div>
+
+                <!-- Project 4: ASCEND Platform -->
+                <div class="project-card">
+                    <div class="project-glow"></div>
+                    <div class="project-header">
+                        <span class="project-badge">Production</span>
+                    </div>
+                    <h3>ASCEND Synthetic Data Platform</h3>
+                    <p>Production-grade distributed ETL pipelines for data profiling, feature engineering, and synthetic data generation. Built scalable microservices with FastAPI and PySpark.</p>
+                    <div class="project-tech">
+                        <span class="tech-tag">PySpark</span>
+                        <span class="tech-tag">FastAPI</span>
+                        <span class="tech-tag">ETL</span>
+                        <span class="tech-tag">Data Eng</span>
+                    </div>
+                    <div class="project-links">
+                        <span class="proprietary">🔒 Proprietary</span>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Publications Section -->
+    <section id="publications">
+        <div class="container">
+            <div class="section-header">
+                <div class="section-badge">Research</div>
+                <h2 class="section-title">Publications</h2>
+                <p class="section-subtitle">Contributing to the advancement of AI and IoT systems</p>
+            </div>
+            
+            <div class="publication-showcase">
+                <div class="publication-card">
+                    <div class="publication-icon">📄</div>
+                    <div class="publication-content">
+                        <h3>Optimizing Resource Allocation in MEC-Enabled CR-NOMA-Assisted IoT Networks: A DRL-Driven Strategy</h3>
+                        <div class="publication-meta">
+                            <span class="venue">IEEE WCNC 2024</span>
+                            <span class="location">Dubai, UAE</span>
+                            <span class="date">May 2024</span>
+                        </div>
+                        <p class="authors">Muhammad Taha Qaiser, <strong>Muhammad Sarmad Sohail</strong>, Minahil Shafqat, Syed Asad Ullah, Haejoon Jung, Syed Ali Hassan</p>
+                        <p class="description">Proposed a Deep Deterministic Policy Gradient (DDPG) framework for optimizing resource allocation in energy-harvesting IoT devices using CR-NOMA and Mobile Edge Computing. Demonstrated superior performance over baseline methods with faster convergence.</p>
+                        <div class="publication-links">
+                            <a href="https://scholar.google.com/citations?view_op=view_citation&hl=en&user=3DpcXZMAAAAJ&citation_for_view=3DpcXZMAAAAJ:u-x6o8ySG0sC" target="_blank">
+                                <span>📄 Read Paper</span>
+                            </a>
+                            <a href="https://drive.google.com/file/d/19qaJNK0aULf1YAteoijH-xRYKmC_4Z6A/view" target="_blank">
+                                <span>🎥 Watch Demo</span>
+                            </a>
+                            <a href="https://www.linkedin.com/posts/msarmadsohail_projectcompletion-teamwork-thankyou-activity-7188945182602522626-d8WP" target="_blank">
+                                <span>📊 View Poster</span>
+                            </a>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Contact Section -->
+    <section id="contact">
+        <div class="container">
+            <div class="contact-content">
+                <div class="contact-left">
+                    <div class="section-badge">Get In Touch</div>
+                    <h2 class="section-title">Let's Work Together</h2>
+                    <p>Interested in collaborating on data engineering or ML projects? Open to discussing remote opportunities and innovative solutions.</p>
+                    
+                    <div class="contact-info">
+                        <div class="info-item">
+                            <span class="info-icon">📧</span>
+                            <div>
+                                <div class="info-label">Email</div>
+                                <a href="mailto:msarmadsohail@gmail.com">msarmadsohail@gmail.com</a>
+                            </div>
+                        </div>
+                        <div class="info-item">
+                            <span class="info-icon">📱</span>
+                            <div>
+                                <div class="info-label">Phone</div>
+                                <a href="tel:+923238540201">92 323 854 0201</a>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                
+                <div class="contact-right">
+                    <div class="social-grid">
+                        <a href="https://github.com/msarmadsohail" target="_blank" class="social-card">
+                            <div class="social-icon">💻</div>
+                            <div class="social-name">GitHub</div>
+                            <div class="social-handle">@msarmadsohail</div>
+                        </a>
+                        <a href="https://linkedin.com/in/msarmadsohail" target="_blank" class="social-card">
+                            <div class="social-icon">💼</div>
+                            <div class="social-name">LinkedIn</div>
+                            <div class="social-handle">@msarmadsohail</div>
+                        </a>
+                        <a href="https://scholar.google.com/citations?user=3DpcXZMAAAAJ" target="_blank" class="social-card">
+                            <div class="social-icon">🎓</div>
+                            <div class="social-name">Scholar</div>
+                            <div class="social-handle">Publications</div>
+                        </a>
+                        <a href="assets/docs/M_SARMAD_SOHAIL_CV.pdf" class="social-card" download>
+                            <div class="social-icon">📄</div>
+                            <div class="social-name">Resume</div>
+                            <div class="social-handle">Download CV</div>
+                        </a>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Footer -->
+    <footer>
+        <div class="container">
+            <p>&copy; 2025 Muhammad Sarmad Sohail. Built with passion for data and AI.</p>
+        </div>
+    </footer>
 
     <script>
         // GSAP ScrollTrigger
@@ -756,6 +1332,57 @@
         profileCard.addEventListener('mouseleave', () => {
             profileCard.querySelector('.profile-inner').style.transform = 
                 'rotateX(0) rotateY(0)';
+        });
+
+        // Project cards animation on scroll
+        gsap.utils.toArray('.project-card').forEach((card, i) => {
+            gsap.from(card, {
+                scrollTrigger: {
+                    trigger: card,
+                    start: 'top 80%',
+                    end: 'top 20%',
+                    toggleActions: 'play none none reverse'
+                },
+                y: 100,
+                opacity: 0,
+                duration: 0.8,
+                delay: i * 0.1
+            });
+        });
+
+        // Publication card animation
+        gsap.from('.publication-card', {
+            scrollTrigger: {
+                trigger: '.publication-card',
+                start: 'top 80%',
+                end: 'top 20%',
+                toggleActions: 'play none none reverse'
+            },
+            x: -100,
+            opacity: 0,
+            duration: 1
+        });
+
+        // Contact section animation
+        gsap.from('.contact-left', {
+            scrollTrigger: {
+                trigger: '#contact',
+                start: 'top 70%'
+            },
+            x: -100,
+            opacity: 0,
+            duration: 1
+        });
+
+        gsap.from('.social-card', {
+            scrollTrigger: {
+                trigger: '.social-grid',
+                start: 'top 80%'
+            },
+            scale: 0,
+            opacity: 0,
+            duration: 0.5,
+            stagger: 0.1
         });
     </script>
 </body>

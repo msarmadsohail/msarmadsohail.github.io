@@ -78,13 +78,25 @@ gsap.from('.publication-card', {
     duration: 1
 });
 
-// Contact section animation
+// Contact section animations
 gsap.from('.contact-left', {
     scrollTrigger: {
         trigger: '#contact',
-        start: 'top 70%'
+        start: 'top 70%',
+        toggleActions: 'play none none reverse'
     },
     x: -100,
+    opacity: 0,
+    duration: 1
+});
+
+gsap.from('.contact-right', {
+    scrollTrigger: {
+        trigger: '#contact',
+        start: 'top 70%',
+        toggleActions: 'play none none reverse'
+    },
+    x: 100,
     opacity: 0,
     duration: 1
 });
@@ -92,10 +104,11 @@ gsap.from('.contact-left', {
 gsap.from('.social-card', {
     scrollTrigger: {
         trigger: '.social-grid',
-        start: 'top 80%'
+        start: 'top 80%',
+        toggleActions: 'play none none reverse'
     },
-    scale: 0,
+    scale: 0.8,
     opacity: 0,
-    duration: 0.5,
+    duration: 0.6,
     stagger: 0.1
 });

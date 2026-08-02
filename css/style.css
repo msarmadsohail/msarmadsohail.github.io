@@ -1,0 +1,2797 @@
+:root {
+    --navy: #1e40af;
+    --navy-dark: #1e3a8a;
+    --burgundy: #dc2626;
+    --burgundy-light: #ef4444;
+    --accent-blue: #3b82f6;
+    --accent-purple: #8b5cf6;
+    --dark: #0f172a;
+    --light: #f1f5f9;
+    --white: #ffffff;
+}
+
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+body {
+    font-family: 'Inter', sans-serif;
+    background: var(--dark);
+    color: var(--white);
+    overflow-x: hidden;
+}
+
+/* Animated Background */
+.bg-animation {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    z-index: 0;
+    background: linear-gradient(135deg, #0f172a 0%, #1e293b 50%, #0f172a 100%);
+}
+
+.bg-animation::before {
+    content: '';
+    position: absolute;
+    top: -50%;
+    left: -50%;
+    width: 200%;
+    height: 200%;
+    background: radial-gradient(circle, rgba(59, 130, 246, 0.1) 0%, transparent 50%);
+    animation: rotate 20s linear infinite;
+}
+
+.bg-animation::after {
+    content: '';
+    position: absolute;
+    top: 0;
+    right: 0;
+    width: 500px;
+    height: 500px;
+    background: radial-gradient(circle, rgba(220, 38, 38, 0.15) 0%, transparent 70%);
+    border-radius: 50%;
+    animation: pulse 4s ease-in-out infinite;
+}
+
+@keyframes rotate {
+    0% { transform: rotate(0deg); }
+    100% { transform: rotate(360deg); }
+}
+
+@keyframes pulse {
+    0%, 100% { transform: scale(1); opacity: 0.5; }
+    50% { transform: scale(1.2); opacity: 0.8; }
+}
+
+@keyframes float {
+    0%, 100% { transform: translateY(0px); }
+    50% { transform: translateY(-20px); }
+}
+
+/* Navbar */
+nav {
+    position: fixed;
+    top: 0;
+    width: 100%;
+    padding: 1.5rem 0;
+    z-index: 1000;
+    background: rgba(15, 23, 42, 0.8);
+    backdrop-filter: blur(20px);
+    border-bottom: 1px solid rgba(255, 255, 255, 0.1);
+    transition: all 0.3s;
+}
+
+nav.scrolled {
+    padding: 1rem 0;
+    background: rgba(15, 23, 42, 0.95);
+    box-shadow: 0 10px 30px rgba(0, 0, 0, 0.3);
+}
+
+nav .container {
+    max-width: 1400px;
+    margin: 0 auto;
+    padding: 0 3rem;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+}
+
+nav .logo {
+    font-family: 'Space Grotesk', sans-serif;
+    font-size: 1.75rem;
+    font-weight: 700;
+    background: linear-gradient(135deg, var(--accent-blue), var(--burgundy-light));
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+    background-clip: text;
+}
+
+nav ul {
+    display: flex;
+    list-style: none;
+    gap: 3rem;
+}
+
+nav a {
+    text-decoration: none;
+    color: rgba(255, 255, 255, 0.8);
+    font-weight: 500;
+    font-size: 1rem;
+    position: relative;
+    transition: color 0.3s;
+}
+
+nav a::after {
+    content: '';
+    position: absolute;
+    bottom: -5px;
+    left: 0;
+    width: 0;
+    height: 2px;
+    background: linear-gradient(90deg, var(--accent-blue), var(--burgundy-light));
+    transition: width 0.3s;
+}
+
+nav a:hover {
+    color: var(--white);
+}
+
+nav a:hover::after {
+    width: 100%;
+}
+
+/* Hero Section */
+#hero {
+    min-height: 100vh;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    position: relative;
+    z-index: 1;
+    padding: 8rem 2rem 4rem;
+}
+
+.hero-content {
+    max-width: 1400px;
+    width: 100%;
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 4rem;
+    align-items: center;
+}
+
+.hero-left {
+    z-index: 10;
+}
+
+.hero-badge {
+    display: inline-block;
+    padding: 0.5rem 1.25rem;
+    background: rgba(59, 130, 246, 0.1);
+    border: 1px solid rgba(59, 130, 246, 0.3);
+    border-radius: 50px;
+    color: var(--accent-blue);
+    font-size: 0.875rem;
+    font-weight: 600;
+    margin-bottom: 2rem;
+    animation: float 3s ease-in-out infinite;
+}
+
+.hero-left h1 {
+    font-family: 'Space Grotesk', sans-serif;
+    font-size: 4.5rem;
+    font-weight: 700;
+    line-height: 1.1;
+    margin-bottom: 1.5rem;
+    background: linear-gradient(135deg, var(--white) 0%, rgba(255, 255, 255, 0.7) 100%);
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+    background-clip: text;
+}
+
+.hero-left .highlight {
+    background: linear-gradient(135deg, var(--accent-blue), var(--burgundy-light));
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+    background-clip: text;
+}
+
+.hero-left p {
+    font-size: 1.25rem;
+    line-height: 1.8;
+    color: rgba(255, 255, 255, 0.7);
+    margin-bottom: 3rem;
+    max-width: 600px;
+}
+
+.cta-buttons {
+    display: flex;
+    gap: 1.5rem;
+    flex-wrap: wrap;
+}
+
+.btn {
+    padding: 1rem 2rem;
+    border-radius: 12px;
+    text-decoration: none;
+    font-weight: 600;
+    font-size: 1rem;
+    transition: all 0.3s;
+    display: inline-flex;
+    align-items: center;
+    gap: 0.5rem;
+    position: relative;
+    overflow: hidden;
+}
+
+.btn::before {
+    content: '';
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    width: 0;
+    height: 0;
+    border-radius: 50%;
+    background: rgba(255, 255, 255, 0.1);
+    transform: translate(-50%, -50%);
+    transition: width 0.6s, height 0.6s;
+}
+
+.btn:hover::before {
+    width: 300px;
+    height: 300px;
+}
+
+.btn-primary {
+    background: linear-gradient(135deg, var(--accent-blue), var(--burgundy-light));
+    color: var(--white);
+    box-shadow: 0 10px 30px rgba(59, 130, 246, 0.3);
+}
+
+.btn-primary:hover {
+    transform: translateY(-3px);
+    box-shadow: 0 15px 40px rgba(59, 130, 246, 0.4);
+}
+
+.btn-secondary {
+    background: rgba(255, 255, 255, 0.05);
+    border: 2px solid rgba(255, 255, 255, 0.2);
+    color: var(--white);
+    backdrop-filter: blur(10px);
+}
+
+.btn-secondary:hover {
+    background: rgba(255, 255, 255, 0.1);
+    border-color: rgba(255, 255, 255, 0.4);
+    transform: translateY(-3px);
+}
+
+.btn span {
+    position: relative;
+    z-index: 1;
+}
+
+/* Hero Right - Profile Card */
+.hero-right {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+.profile-card {
+    position: relative;
+    width: 400px;
+    height: 500px;
+    perspective: 1000px;
+}
+
+.profile-inner {
+    width: 100%;
+    height: 100%;
+    position: relative;
+    transform-style: preserve-3d;
+    transition: transform 0.6s;
+}
+
+/* (hover: hover) and (pointer: fine) - a real mouse, not a touchscreen that
+   happens to fire :hover on tap. Phones get their own tilt from JS instead
+   (js/main.js), and the two must never both be live on the same device. */
+@media (hover: hover) and (pointer: fine) {
+    .profile-card:hover .profile-inner {
+        transform: rotateY(5deg) rotateX(5deg);
+    }
+}
+
+.profile-glass {
+    position: relative;
+    inset: 0;
+    background: rgba(255, 255, 255, 0.05);
+    backdrop-filter: blur(20px);
+    border-radius: 30px;
+    border: 1px solid rgba(255, 255, 255, 0.1);
+    overflow: hidden;
+    box-shadow: 0 20px 60px rgba(0, 0, 0, 0.3);
+}
+
+.profile-glass::before {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: -100%;
+    width: 100%;
+    height: 100%;
+    background: linear-gradient(90deg, transparent, rgba(255, 255, 255, 0.1), transparent);
+    transition: left 0.5s;
+}
+
+.profile-card:hover .profile-glass::before {
+    left: 100%;
+}
+
+.profile-photo {
+    width: 250px;
+    height: 250px;
+    border-radius: 50%;
+    margin: 3rem auto 2rem;
+    display: block;
+    border: 5px solid rgba(255, 255, 255, 0.2);
+    box-shadow: 0 20px 60px rgba(59, 130, 246, 0.3);
+    object-fit: cover;
+    position: relative;
+    z-index: 2;
+    animation: float 4s ease-in-out infinite;
+}
+
+.profile-info {
+    text-align: center;
+    padding: 0 2rem 2rem;
+    position: relative;
+    z-index: 2;
+}
+
+.profile-info h3 {
+    font-family: 'Space Grotesk', sans-serif;
+    font-size: 1.5rem;
+    margin-bottom: 0.5rem;
+}
+
+.profile-info .role {
+    color: var(--accent-blue);
+    font-weight: 600;
+    margin-bottom: 1rem;
+}
+
+.profile-stats {
+    display: flex;
+    justify-content: space-around;
+    margin-top: 2rem;
+}
+
+.stat {
+    text-align: center;
+}
+
+.stat-number {
+    font-size: 2rem;
+    font-weight: 700;
+    background: linear-gradient(135deg, var(--accent-blue), var(--burgundy-light));
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+    background-clip: text;
+}
+
+.stat-label {
+    font-size: 0.875rem;
+    color: rgba(255, 255, 255, 0.6);
+}
+
+/* About Section */
+#about {
+    padding: 8rem 2rem;
+    position: relative;
+    z-index: 1;
+}
+
+.container {
+    max-width: 1400px;
+    margin: 0 auto;
+}
+
+.section-header {
+    text-align: center;
+    margin-bottom: 5rem;
+}
+
+.section-badge {
+    display: inline-block;
+    padding: 0.5rem 1.25rem;
+    background: rgba(220, 38, 38, 0.1);
+    border: 1px solid rgba(220, 38, 38, 0.3);
+    border-radius: 50px;
+    color: var(--burgundy-light);
+    font-size: 0.875rem;
+    font-weight: 600;
+    margin-bottom: 1rem;
+}
+
+.section-title {
+    font-family: 'Space Grotesk', sans-serif;
+    font-size: 3.5rem;
+    font-weight: 700;
+    margin-bottom: 1.5rem;
+}
+
+.section-subtitle {
+    font-size: 1.25rem;
+    color: rgba(255, 255, 255, 0.6);
+    max-width: 700px;
+    margin: 0 auto;
+}
+
+.about-grid {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 3rem;
+    align-items: start;
+}
+
+.about-content p {
+    font-size: 1.125rem;
+    line-height: 1.8;
+    color: rgba(255, 255, 255, 0.7);
+    margin-bottom: 1.5rem;
+}
+
+.about-content .highlight-text {
+    color: var(--accent-blue);
+    font-weight: 600;
+}
+
+/* Tech Stack */
+.tech-stack {
+    display: grid;
+    gap: 1rem;
+}
+
+.tech-category {
+    background: rgba(255, 255, 255, 0.03);
+    border: 1px solid rgba(255, 255, 255, 0.1);
+    border-radius: 20px;
+    padding: 1.5rem;
+    backdrop-filter: blur(10px);
+    transition: all 0.3s;
+}
+
+.tech-category:hover {
+    background: rgba(255, 255, 255, 0.05);
+    border-color: rgba(59, 130, 246, 0.3);
+    transform: translateY(-5px);
+}
+
+.tech-category h4 {
+    font-family: 'Space Grotesk', sans-serif;
+    font-size: 1.15rem;
+    margin-bottom: 0.75rem;
+    color: var(--accent-blue);
+}
+
+.tech-items {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 0.75rem;
+}
+
+.tech-item {
+    padding: 0.5rem 1rem;
+    background: rgba(59, 130, 246, 0.1);
+    border: 1px solid rgba(59, 130, 246, 0.2);
+    border-radius: 50px;
+    font-size: 0.875rem;
+    font-weight: 500;
+    color: rgba(255, 255, 255, 0.9);
+    transition: all 0.3s;
+}
+
+.tech-item:hover {
+    background: rgba(59, 130, 246, 0.2);
+    border-color: rgba(59, 130, 246, 0.4);
+    transform: translateY(-2px);
+}
+
+/* Scroll Indicator */
+.scroll-indicator {
+    position: absolute;
+    bottom: 2rem;
+    left: 50%;
+    transform: translateX(-50%);
+    animation: bounce 2s infinite;
+}
+
+.scroll-indicator::before {
+    content: '↓';
+    font-size: 2rem;
+    color: rgba(255, 255, 255, 0.4);
+}
+
+@keyframes bounce {
+    0%, 100% { transform: translateX(-50%) translateY(0); }
+    50% { transform: translateX(-50%) translateY(10px); }
+}
+
+/* Projects Section */
+#projects {
+    padding: 8rem 2rem;
+    position: relative;
+    z-index: 1;
+}
+
+.projects-grid {
+    display: grid;
+    /* minmax(min(100%, 400px), 1fr) instead of minmax(400px, 1fr): the bare
+       400px floor is larger than a phone viewport, so tracks could not shrink
+       and the grid forced the page wider than the screen. min(100%, 400px)
+       lets the track collapse to the container on narrow screens. */
+    grid-template-columns: repeat(auto-fit, minmax(min(100%, 400px), 1fr));
+    gap: 2rem;
+    /* Lets single-width cards backfill the slot left over after a span-2
+       featured card, instead of leaving a visible hole in the grid. */
+    grid-auto-flow: dense;
+}
+
+/* @media (min-width: 1024px) {
+    .projects-grid {
+        grid-template-columns: repeat(2, 1fr);
+    }
+} */
+
+.project-card {
+    background: rgba(255, 255, 255, 0.03);
+    border: 1px solid rgba(255, 255, 255, 0.1);
+    border-radius: 20px;
+    padding: 2.5rem;
+    position: relative;
+    overflow: hidden;
+    transition: all 0.4s cubic-bezier(0.23, 1, 0.32, 1);
+}
+
+.project-card::before {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background: linear-gradient(135deg, rgba(59, 130, 246, 0.1), rgba(220, 38, 38, 0.1));
+    opacity: 0;
+    transition: opacity 0.4s;
+}
+
+.project-card:hover::before {
+    opacity: 1;
+}
+
+.project-card:hover {
+    transform: translateY(-10px);
+    border-color: rgba(59, 130, 246, 0.3);
+    box-shadow: 0 20px 60px rgba(59, 130, 246, 0.2);
+}
+
+.project-card.featured {
+    /* Deliberately NOT span 2 by default. When auto-fit resolves to a single
+       column, a span-2 item conjures an implicit second track and the whole
+       page overflows horizontally - which is what broke the mobile layout.
+       The span is opted into below, once there is room for two columns. */
+    grid-column: span 1;
+    background: linear-gradient(135deg, rgba(59, 130, 246, 0.05), rgba(220, 38, 38, 0.05));
+    border: 2px solid rgba(59, 130, 246, 0.2);
+}
+
+/* Three grouped tracks inside the tall ASCEND card, ordered as in the CV entry. */
+.project-groups {
+    display: flex;
+    flex-direction: column;
+    gap: 1.15rem;
+    margin: 1.25rem 0 0;
+}
+
+.project-groups .pg h4 {
+    font-family: 'Space Grotesk', sans-serif;
+    font-size: 0.95rem;
+    font-weight: 700;
+    letter-spacing: 0.02em;
+    /* 4.85:1 on the card ground, measured. Passes AA for 15px bold. */
+    color: var(--accent-blue);
+    margin: 0 0 0.4rem;
+}
+
+.project-groups .pg ul {
+    margin: 0;
+    padding-left: 1.05rem;
+}
+
+.project-groups .pg li {
+    font-size: 0.9rem;
+    line-height: 1.6;
+    color: rgba(255, 255, 255, 0.7);
+    margin-bottom: 0.35rem;
+}
+
+.project-groups .pg li strong {
+    color: rgba(255, 255, 255, 0.92);
+    font-weight: 600;
+}
+
+/* The projects grid only resolves to two or more columns above 1024px (see the
+   max-width:1024px block, which forces a single column), so that is the one
+   boundary where a featured card can safely span two tracks. */
+@media (min-width: 1025px) {
+    .project-card.featured {
+        grid-column: span 2;
+    }
+
+    /* Paired with .featured on purpose: the tall card is only two rows tall
+       once there are two columns for it to be tall next to. */
+    .project-card.tall {
+        grid-row: span 2;
+    }
+}
+
+/* ---- Scroll reveals -------------------------------------------------------
+   Hidden only while html.js is set, which the inline script in <head> adds and
+   takes back off if js/main.js never arrives. Scripts blocked, or that file
+   404ing, therefore leaves the page fully readable instead of blank.
+
+   These were gsap.from({opacity: 0}) with a ScrollTrigger at start:'top 80%'.
+   Measured failure: on a tall viewport the elements in the final screenful can
+   never reach that line, because the page runs out of scroll distance before
+   they get there, so they stayed invisible for good. 4 of 18 at 2560x1440, 6 of
+   18 at 3840x2160. That is the "everything disappears when I zoom out" report.
+
+   Distances, durations and the 0.1s stagger are lifted from the GSAP values the
+   live site used, because the first attempt at this quietly halved all of them:
+   it inherited .project-card's transition: all 0.4s and moved 48px instead of
+   100px, which read as no animation at all.
+
+   Keyframes rather than transitions, deliberately. .project-card and
+   .publication-card both animate transform on :hover through transition: all,
+   so a reveal built on transitions would have to fight the hover for the same
+   property and duration. An animation runs alongside and, with fill-mode
+   backwards rather than both, leaves no final state pinned to interfere with
+   the hover afterwards. Backwards is still needed so a staggered element holds
+   its from-state during its delay instead of flashing in and out.
+
+   :not(.is-visible) rather than a .is-visible override on purpose. Once the
+   class lands the hiding rule stops matching at all, so it cannot outrank the
+   :hover transforms these cards rely on.
+   -------------------------------------------------------------------------- */
+/* The social cards had no transition at all, so their :hover lift and tint
+   popped rather than eased. Unrelated to the reveal, which is a keyframe
+   animation, but it was noticed while working here. */
+.social-card {
+    transition: all 0.4s cubic-bezier(0.23, 1, 0.32, 1);
+}
+
+@keyframes reveal-late-in {
+    from { opacity: 0; transform: translateY(16px); }
+}
+
+@keyframes reveal-up {
+    from { opacity: 0; transform: translateY(100px); }
+}
+
+@keyframes reveal-from-left {
+    from { opacity: 0; transform: translateX(-100px); }
+}
+
+@keyframes reveal-from-right {
+    from { opacity: 0; transform: translateX(100px); }
+}
+
+@keyframes reveal-pop {
+    from { opacity: 0; transform: scale(0.8); }
+}
+
+html.js .project-card:not(.is-visible),
+html.js .publication-card:not(.is-visible),
+html.js .contact-left:not(.is-visible),
+html.js .contact-right:not(.is-visible),
+html.js .social-card:not(.is-visible) {
+    opacity: 0;
+}
+
+/* Each hidden state matches the from-frame of its own keyframe, or the element
+   would jump at the moment the animation takes over. */
+html.js .project-card:not(.is-visible) {
+    transform: translateY(100px);
+}
+
+html.js .publication-card:not(.is-visible),
+html.js .contact-left:not(.is-visible) {
+    transform: translateX(-100px);
+}
+
+html.js .contact-right:not(.is-visible) {
+    transform: translateX(100px);
+}
+
+html.js .social-card:not(.is-visible) {
+    transform: scale(0.8);
+}
+
+/* cubic-bezier(0.25, 0.46, 0.45, 0.94) is GSAP's default power1.out, so the
+   feel matches what was on the live site and not just the distance. */
+html.js .project-card.is-visible {
+    animation: reveal-up 0.8s cubic-bezier(0.25, 0.46, 0.45, 0.94) backwards;
+}
+
+html.js .publication-card.is-visible,
+html.js .contact-left.is-visible {
+    animation: reveal-from-left 1s cubic-bezier(0.25, 0.46, 0.45, 0.94) backwards;
+}
+
+html.js .contact-right.is-visible {
+    animation: reveal-from-right 1s cubic-bezier(0.25, 0.46, 0.45, 0.94) backwards;
+}
+
+html.js .social-card.is-visible {
+    animation: reveal-pop 0.6s cubic-bezier(0.25, 0.46, 0.45, 0.94) backwards;
+}
+
+/* Reduced motion means no large movement, not no feedback. The travel and the
+   scale come off; a plain opacity fade stays, which is the usual accessible
+   compromise and keeps the page from looking inert.
+
+   This matters more than it sounds. The old GSAP version had no such check at
+   all, so it animated regardless of the setting. Anyone browsing with reduced
+   motion on, which on Windows is just "Show animations" switched off, would see
+   the old site animate and a version that respected the setting do nothing, and
+   reasonably conclude the animation had been broken. */
+@keyframes reveal-fade {
+    from { opacity: 0; }
+}
+
+@media (prefers-reduced-motion: reduce) {
+    html.js .project-card:not(.is-visible),
+    html.js .publication-card:not(.is-visible),
+    html.js .contact-left:not(.is-visible),
+    html.js .contact-right:not(.is-visible),
+    html.js .social-card:not(.is-visible),
+    html.js .reveal-late:not(.is-visible) {
+        transform: none;
+    }
+
+    html.js .project-card.is-visible,
+    html.js .publication-card.is-visible,
+    html.js .contact-left.is-visible,
+    html.js .contact-right.is-visible,
+    html.js .social-card.is-visible,
+    html.js .reveal-late.is-visible {
+        animation: reveal-fade 0.5s ease backwards;
+    }
+}
+
+/* ---- ASCEND's two-beat reveal ---------------------------------------------
+   The card comes in with its lead line and the first two groups, platform and
+   data modules plus the rule-based engine. The research group and the tag row
+   follow, pulled in by the Job Intelligence Agent card as it lands in the slot
+   beside them (data-reveals-also in the markup).
+
+   Scoped to 1330px because that is the measured width at which .projects-grid
+   resolves to three columns and JIA is actually next to ASCEND. Below it JIA is
+   somewhere further down the page, and holding back a third of a card's content
+   until you scroll past the whole card would just read as a truncated card.
+
+   opacity and transform only, never display or visibility: the hidden content
+   must keep occupying its space, or ASCEND's height changes and it is ASCEND's
+   height that sets the first two grid rows.
+   -------------------------------------------------------------------------- */
+@media (min-width: 1330px) {
+    html.js .reveal-late {
+        transition: opacity 0.55s ease, transform 0.55s cubic-bezier(0.22, 1, 0.36, 1);
+    }
+
+    html.js .reveal-late:not(.is-visible) {
+        opacity: 0;
+        transform: translateY(16px);
+    }
+
+    /* Beat 2 starts on the same frame as the JIA card, not after it. The delay
+       this used to carry made JIA finish arriving before ASCEND's remaining
+       groups moved, which pulled attention to JIA and cost a reader their place
+       in the card they were already reading. Same duration and easing as the
+       cards, so the two read as one motion rather than two events. The delay
+       itself is copied from the JIA card at reveal time, in main.js. */
+    html.js .reveal-late.is-visible {
+        animation: reveal-late-in 0.8s cubic-bezier(0.25, 0.46, 0.45, 0.94) backwards;
+    }
+}
+
+.project-glow {
+    position: absolute;
+    top: -50%;
+    right: -50%;
+    width: 200%;
+    height: 200%;
+    background: radial-gradient(circle, rgba(59, 130, 246, 0.1) 0%, transparent 60%);
+    pointer-events: none;
+}
+
+.project-header {
+    display: flex;
+    gap: 0.75rem;
+    margin-bottom: 1.5rem;
+    position: relative;
+    z-index: 2;
+}
+
+.project-badge {
+    padding: 0.375rem 0.875rem;
+    background: rgba(59, 130, 246, 0.1);
+    border: 1px solid rgba(59, 130, 246, 0.2);
+    border-radius: 50px;
+    font-size: 0.75rem;
+    font-weight: 600;
+    color: var(--accent-blue);
+}
+
+.project-badge.highlight {
+    background: rgba(220, 38, 38, 0.1);
+    border-color: rgba(220, 38, 38, 0.2);
+    color: var(--burgundy-light);
+}
+
+.project-card h3 {
+    font-family: 'Space Grotesk', sans-serif;
+    font-size: 1.75rem;
+    margin-bottom: 1rem;
+    position: relative;
+    z-index: 2;
+}
+
+.project-card p {
+    color: rgba(255, 255, 255, 0.7);
+    line-height: 1.8;
+    margin-bottom: 1.5rem;
+    position: relative;
+    z-index: 2;
+}
+
+/* Bulleted breakdown inside a project card - used where one card stands in for
+   several related builds, so each is named without inflating the card count. */
+.project-list {
+    list-style: none;
+    margin: -0.75rem 0 1.5rem;
+    padding: 0;
+    position: relative;
+    z-index: 2;
+}
+
+.project-list li {
+    color: rgba(255, 255, 255, 0.7);
+    line-height: 1.7;
+    padding-left: 1.1rem;
+    margin-bottom: 0.5rem;
+    position: relative;
+    font-size: 0.95rem;
+}
+
+.project-list li::before {
+    content: '';
+    position: absolute;
+    left: 0;
+    top: 0.7em;
+    width: 5px;
+    height: 5px;
+    border-radius: 50%;
+    background: var(--accent-blue, #3b82f6);
+}
+
+.project-list li strong {
+    color: rgba(255, 255, 255, 0.92);
+    font-weight: 600;
+}
+
+.project-tech {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 0.5rem;
+    margin-bottom: 1.5rem;
+    position: relative;
+    z-index: 2;
+}
+
+.tech-tag {
+    padding: 0.375rem 0.875rem;
+    background: rgba(255, 255, 255, 0.05);
+    border: 1px solid rgba(255, 255, 255, 0.1);
+    border-radius: 50px;
+    font-size: 0.875rem;
+    color: rgba(255, 255, 255, 0.8);
+}
+
+.project-links {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 1rem;
+    position: relative;
+    z-index: 2;
+}
+
+.project-links a {
+    color: var(--accent-blue);
+    text-decoration: none;
+    font-weight: 600;
+    transition: color 0.3s;
+}
+
+.project-links a:hover {
+    color: var(--burgundy-light);
+}
+
+.proprietary {
+    color: rgba(255, 255, 255, 0.5);
+    font-style: italic;
+}
+
+/* Publications Section */
+#publications {
+    padding: 8rem 2rem;
+    position: relative;
+    z-index: 1;
+    background: rgba(255, 255, 255, 0.02);
+}
+
+.publication-showcase {
+    max-width: 1000px;
+    margin: 0 auto;
+}
+
+.publication-card {
+    background: rgba(255, 255, 255, 0.03);
+    border: 1px solid rgba(255, 255, 255, 0.1);
+    border-left: 4px solid var(--burgundy-light);
+    border-radius: 20px;
+    padding: 3rem;
+    display: flex;
+    gap: 2rem;
+    transition: all 0.4s;
+}
+
+.publication-card:hover {
+    transform: translateX(10px);
+    border-left-color: var(--accent-blue);
+    box-shadow: 0 20px 60px rgba(59, 130, 246, 0.15);
+}
+
+.publication-icon {
+    font-size: 3rem;
+    flex-shrink: 0;
+}
+
+.publication-content h3 {
+    font-family: 'Space Grotesk', sans-serif;
+    font-size: 1.75rem;
+    margin-bottom: 1rem;
+    line-height: 1.3;
+}
+
+.publication-meta {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 1rem;
+    margin-bottom: 1rem;
+}
+
+.publication-meta span {
+    padding: 0.375rem 0.875rem;
+    background: rgba(220, 38, 38, 0.1);
+    border: 1px solid rgba(220, 38, 38, 0.2);
+    border-radius: 50px;
+    font-size: 0.875rem;
+    color: var(--burgundy-light);
+    font-weight: 600;
+}
+
+.authors {
+    color: rgba(255, 255, 255, 0.6);
+    font-style: italic;
+    margin-bottom: 1rem;
+    line-height: 1.6;
+}
+
+.authors strong {
+    color: var(--accent-blue);
+    font-style: normal;
+}
+
+.description {
+    color: rgba(255, 255, 255, 0.7);
+    line-height: 1.8;
+    margin-bottom: 1.5rem;
+}
+
+.publication-links {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 1rem;
+}
+
+.publication-links a {
+    padding: 0.75rem 1.5rem;
+    background: rgba(59, 130, 246, 0.1);
+    border: 1px solid rgba(59, 130, 246, 0.2);
+    border-radius: 10px;
+    color: var(--accent-blue);
+    text-decoration: none;
+    font-weight: 600;
+    transition: all 0.3s;
+}
+
+.publication-links a:hover {
+    background: rgba(59, 130, 246, 0.2);
+    transform: translateY(-2px);
+}
+
+/* Contact Section */
+#contact {
+    padding: 8rem 2rem 6rem;
+    position: relative;
+    z-index: 1;
+}
+
+.contact-content {
+    display: grid;
+    grid-template-columns: 1fr 1.2fr;
+    gap: 5%;
+    align-items: center;
+    max-width: 1200px;
+    margin: 0 auto;
+}
+
+.contact-left {
+    display: flex;
+    flex-direction: column;
+}
+
+.contact-info {
+    display: flex;
+    flex-direction: column;
+    gap: 1rem;
+    align-items: center;
+    justify-content: center;
+}
+
+.info-item {
+    display: flex;
+    align-items: center;
+    gap: 1.25rem;
+    padding: 1rem 3rem;
+    background: rgba(255, 255, 255, 0.03);
+    border: 1px solid rgba(255, 255, 255, 0.1);
+    border-radius: 20px;
+    transition: all 0.3s;
+    min-height: 80px;
+    width: max-content;
+}
+
+.info-item:hover {
+    background: rgba(255, 255, 255, 0.05);
+    border-color: rgba(59, 130, 246, 0.3);
+    transform: translateY(-5px) scale(1.05);
+}
+
+.info-icon {
+    font-size: 2.5rem;
+    flex-shrink: 0;
+}
+
+
+.info-item a {
+    color: var(--white);
+    text-decoration: none;
+    font-weight: 500;
+    font-size: 1.1em;
+}
+
+.contact-right {
+    display: flex;
+    align-items: center;
+}
+
+.social-grid {
+    display: grid;
+    /* minmax(0, 1fr) rather than 1fr: a bare 1fr track has an automatic
+       min-content floor, so these four cards refused to shrink below the width
+       of their longest handle and forced the whole page to scroll sideways on
+       phones. minmax(0, ...) drops the floor so the tracks really are fluid. */
+    grid-template-columns: repeat(4, minmax(0, 1fr));
+    gap: 0.5rem;
+}
+
+.social-card {
+    /* Flex and grid children default to min-width:auto, which reintroduces the
+       same intrinsic floor the track sizing just removed. */
+    min-width: 0;
+    aspect-ratio: auto;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    padding: 0.5rem;
+    background: rgba(255, 255, 255, 0.03);
+    border: 1px solid rgba(255, 255, 255, 0.1);
+    border-radius: 20px;
+    text-align: center;
+    text-decoration: none;
+    margin: 0.1rem;
+}
+
+.social-card:hover {
+    background: rgba(255, 255, 255, 0.05);
+    border-color: rgba(59, 130, 246, 0.3);
+    transform: translateY(-5px) scale(1.05);
+}
+
+.social-icon {
+    font-size: 2rem;
+    margin-bottom: 0.5rem;
+    color: white;
+}
+
+/* Sized to the 2rem glyphs these replaced, so the desktop grid is unchanged.
+   currentColor means the icon picks up the card's own colour and its hover
+   without a second rule. */
+.social-svg {
+    display: block;
+    width: 2rem;
+    height: 2rem;
+    fill: currentColor;
+}
+
+/* The address has its own tile in .contact-left at this width; the mail card
+   exists for phones, which hide that tile in favour of a single row of four. */
+.social-card-mail {
+    display: none;
+}
+
+.social-handle {
+    font-size: 0.875rem;  /* Changed from 0.75rem */
+    color: rgba(255, 255, 255, 0.8);  
+    font-weight: 500;  /* ADD this */
+}
+
+/* Footer */
+footer {
+    padding: 1.5rem;
+    text-align: center;
+    border-top: 1px solid rgba(255, 255, 255, 0.1);
+    position: relative;
+    z-index: 1;
+}
+
+footer p {
+    color: rgba(255, 255, 255, 0.5);
+    font-size: 0.875rem;
+}
+
+/* Responsive */
+@media (max-width: 1200px) {
+    .hero-content {
+        gap: 3rem;
+    }
+    
+    .profile-card {
+        width: 350px;
+        height: 450px;
+    }
+    
+    .profile-photo {
+        width: 200px;
+        height: 200px;
+    }
+}
+
+@media (max-width: 1024px) {
+    .hero-content {
+        grid-template-columns: 1fr;
+        text-align: center;
+        gap: 3rem;
+    }
+    
+    .hero-left {
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+    }
+    
+    .hero-left h1 {
+        font-size: 3.5rem;
+    }
+    
+    .hero-left p {
+        max-width: 100%;
+    }
+    
+    .cta-buttons {
+        justify-content: center;
+    }
+    
+    .profile-card {
+        width: 350px;
+        height: 450px;
+    }
+    
+    .about-grid {
+        grid-template-columns: 1fr;
+    }
+    
+    .projects-grid {
+        grid-template-columns: 1fr;
+    }
+    
+    .project-card.featured {
+        grid-column: span 1;
+    }
+    
+    nav ul {
+        gap: 1.5rem;
+    }
+
+    .contact-content {
+        /* minmax(0, 1fr), not 1fr: the email address inside .info-item sets a
+           min-content width that a bare 1fr track cannot shrink below, which
+           pushed the column past the viewport on phones. */
+        grid-template-columns: minmax(0, 1fr);
+        gap: 2rem;
+    }
+
+    .contact-left,
+    .contact-right {
+        /* Grid children default to min-width:auto, which restores the same
+           floor the track sizing just removed. */
+        min-width: 0;
+    }
+    
+    .contact-right {
+        justify-content: center;
+    }
+    
+    .social-grid {
+        max-width: 500px;
+        margin: 0 auto;
+    }
+}
+
+@media (max-width: 768px) {
+    nav .container {
+        padding: 0 1.5rem;
+    }
+    
+    nav ul {
+        gap: 1rem;
+        font-size: 0.875rem;
+    }
+    
+    .hero-left h1 {
+        font-size: 2.5rem;
+    }
+
+    /* Decorative only, and there's no room to spare under the hero on a
+       phone. Desktop keeps it as-is. */
+    .scroll-indicator {
+        display: none;
+    }
+    
+    .section-title {
+        font-size: 2.5rem;
+    }
+    
+    .profile-card {
+        width: 100%;
+        max-width: 320px;
+        height: 420px;
+    }
+    
+    .profile-photo {
+        width: 180px;
+        height: 180px;
+        margin: 2rem auto 1.5rem;
+    }
+    
+    .profile-info h3 {
+        font-size: 1.25rem;
+    }
+    
+    .profile-stats {
+        margin-top: 1.5rem;
+    }
+    
+    .stat-number {
+        font-size: 1.5rem;
+    }
+    
+    .publication-card {
+        flex-direction: column;
+        padding: 2rem;
+    }
+    
+    .container {
+        padding: 0 1.5rem;
+    }
+
+    .info-item {
+        padding: 1.25rem;
+        min-height: 100px;
+        min-width: 0;
+        /* The base rule sets width: max-content, which is an explicit refusal
+           to shrink - it sizes to the email address regardless of how narrow
+           the screen is. Auto lets it track the container instead. */
+        width: auto;
+    }
+
+    /* An email address is one unbreakable token; without this it sets the
+       minimum width of everything that contains it. */
+    .info-item a {
+        overflow-wrap: anywhere;
+    }
+    
+    .social-grid {
+        gap: 0.75rem;
+    }
+    
+    .social-card {
+        padding: 0.5rem;
+    }
+    
+    .social-icon {
+        font-size: 2rem;
+    }
+}
+
+@media (max-width: 480px) {
+    .hero-left h1 {
+        font-size: 2rem;
+    }
+    
+    .section-title {
+        font-size: 2rem;
+    }
+    
+    .profile-card {
+        max-width: 280px;
+        height: 380px;
+    }
+    
+    .profile-photo {
+        width: 150px;
+        height: 150px;
+    }
+    
+    .cta-buttons {
+        flex-direction: column;
+        width: 100%;
+    }
+    
+    .btn {
+        width: 100%;
+        justify-content: center;
+    }
+
+    .social-grid {
+        grid-template-columns: 1fr;
+        max-width: 300px;
+    }
+    
+    .social-card {
+        aspect-ratio: auto;
+        padding: 0.25rem;
+    }
+}
+
+/* Four abreast is too many below the tablet breakpoint even with fluid tracks -
+   the labels become unreadable slivers. Two columns keeps them legible. */
+@media (max-width: 768px) {
+    .social-grid {
+        grid-template-columns: repeat(2, minmax(0, 1fr));
+    }
+}
+
+/* The scroll-reveal animations start elements off-axis (gsap.from with x: 100 on
+   .contact-right, x: -100 on .publication-card and .contact-left). Those are
+   transforms on full-width elements, so until each one scrolls into view it
+   extends the document's scrollable width and the page can be dragged sideways.
+   Clipping the horizontal axis at the root is the fix; `clip` is preferred over
+   `hidden` because it does not turn the body into a scroll container. */
+html {
+    overflow-x: hidden;
+    overflow-x: clip;
+}
+
+/* =========================================================================
+   Mobile navigation
+   Five links plus the logo cannot fit at 320-480px at any readable font size.
+   Before this, nav ul simply overflowed: the logo overlapped "Home" and
+   "Contact" was clipped off the right edge - unreachable, not just ugly.
+   Below 720px the links collapse into a toggle panel instead.
+   ========================================================================= */
+.nav-toggle {
+    display: none;             /* shown only at the mobile breakpoint below */
+    flex-direction: column;
+    justify-content: center;
+    gap: 5px;
+    width: 44px;               /* 44px is the minimum comfortable touch target */
+    height: 44px;
+    padding: 0;
+    border: 1px solid rgba(255, 255, 255, 0.15);
+    border-radius: 10px;
+    background: rgba(255, 255, 255, 0.04);
+    cursor: pointer;
+    transition: background 0.2s, border-color 0.2s;
+}
+
+.nav-toggle:hover,
+.nav-toggle:focus-visible {
+    background: rgba(59, 130, 246, 0.12);
+    border-color: rgba(59, 130, 246, 0.5);
+}
+
+.nav-toggle-bar {
+    display: block;
+    width: 20px;
+    height: 2px;
+    margin: 0 auto;
+    border-radius: 2px;
+    background: rgba(255, 255, 255, 0.85);
+    transition: transform 0.25s, opacity 0.2s;
+}
+
+/* Bars morph into a close (x) glyph when the panel is open. */
+.nav-toggle[aria-expanded="true"] .nav-toggle-bar:nth-child(1) {
+    transform: translateY(7px) rotate(45deg);
+}
+.nav-toggle[aria-expanded="true"] .nav-toggle-bar:nth-child(2) {
+    opacity: 0;
+}
+.nav-toggle[aria-expanded="true"] .nav-toggle-bar:nth-child(3) {
+    transform: translateY(-7px) rotate(-45deg);
+}
+
+@media (max-width: 720px) {
+    nav .container {
+        padding: 0 1.5rem;
+        /* Lets the panel below position against the bar rather than the page. */
+        position: relative;
+    }
+
+    .nav-toggle {
+        display: flex;
+    }
+
+    nav ul {
+        /* Collapsed by default. Uses a grid-rows transition rather than
+           max-height so the panel sizes itself to its content. */
+        position: absolute;
+        top: calc(100% + 1rem);
+        right: 1.5rem;
+        left: 1.5rem;
+        display: grid;
+        grid-template-rows: 0fr;
+        gap: 0;
+        padding: 0;
+        overflow: hidden;
+        /* Fully opaque, and no backdrop-filter of its own: the parent <nav>
+           already has one, and nesting filtered layers let the hero text show
+           through the panel and made the links hard to read. */
+        background: #111a2e;
+        border: 1px solid rgba(255, 255, 255, 0.12);
+        border-radius: 14px;
+        box-shadow: 0 20px 40px rgba(0, 0, 0, 0.4);
+        opacity: 0;
+        pointer-events: none;
+        transition: grid-template-rows 0.28s ease, opacity 0.2s ease;
+    }
+
+    nav ul.open {
+        grid-template-rows: 1fr;
+        opacity: 1;
+        pointer-events: auto;
+    }
+
+    /* The inner wrapper is what actually collapses; direct children of a grid
+       with 0fr rows still contribute their own height otherwise. */
+    nav ul > li {
+        min-height: 0;
+    }
+
+    nav ul li a {
+        display: block;
+        padding: 1rem 1.25rem;
+        border-bottom: 1px solid rgba(255, 255, 255, 0.06);
+    }
+
+    nav ul li:last-child a {
+        border-bottom: none;
+    }
+}
+
+/* =========================================================================
+   Résumé viewer
+   Opening the résumé and downloading it are different events - this is a
+   separate in-page panel, not the raw PDF link, so the two can eventually be
+   told apart. No tracking wired up yet, this is the viewer itself.
+   ========================================================================= */
+.resume-modal {
+    position: fixed;
+    inset: 0;
+    z-index: 2000;
+    display: none;
+    align-items: center;
+    justify-content: center;
+    padding: 2rem;
+}
+
+.resume-modal.open {
+    display: flex;
+}
+
+.resume-modal-backdrop {
+    position: absolute;
+    inset: 0;
+    background: rgba(15, 23, 42, 0.85);
+    backdrop-filter: blur(6px);
+}
+
+.resume-modal-panel {
+    position: relative;
+    width: 100%;
+    /* Wide enough to actually use a desktop monitor - a fixed 900px read as
+       a small box floating in the middle of a wide screen, and 1200px still
+       did on a 4K display. The render itself is re-rasterised to whatever
+       width this resolves to (js/main.js), so a bigger cap doesn't cost any
+       sharpness - it's not a fixed image being stretched. */
+    max-width: min(85vw, 1600px);
+    height: min(90vh, 1300px);
+    display: flex;
+    flex-direction: column;
+    background: rgba(15, 23, 42, 0.95);
+    border: 1px solid rgba(255, 255, 255, 0.1);
+    border-radius: 20px;
+    box-shadow: 0 20px 60px rgba(0, 0, 0, 0.5);
+    overflow: hidden;
+}
+
+/* Only visible while zoom is actively changing (js/main.js toggles
+   .visible and clears it after a short idle) - a readout, not a control. */
+.resume-zoom-indicator {
+    position: absolute;
+    right: 1rem;
+    bottom: 1rem;
+    padding: 0.35rem 0.7rem;
+    border-radius: 8px;
+    background: rgba(15, 23, 42, 0.85);
+    border: 1px solid rgba(255, 255, 255, 0.15);
+    color: var(--white);
+    font-family: 'Inter', sans-serif;
+    font-size: 0.75rem;
+    opacity: 0;
+    pointer-events: none;
+    transition: opacity 0.25s ease;
+    z-index: 5;
+}
+
+.resume-zoom-indicator.visible {
+    opacity: 1;
+}
+
+.resume-modal-bar {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    padding: 1rem 1.5rem;
+    border-bottom: 1px solid rgba(255, 255, 255, 0.1);
+    font-family: 'Space Grotesk', sans-serif;
+    font-weight: 600;
+    flex-shrink: 0;
+}
+
+.resume-modal-actions {
+    display: flex;
+    gap: 0.75rem;
+}
+
+.resume-modal-btn {
+    display: inline-flex;
+    align-items: center;
+    gap: 0.4rem;
+    padding: 0.5rem 0.9rem;
+    border-radius: 10px;
+    border: 1px solid rgba(255, 255, 255, 0.2);
+    background: rgba(255, 255, 255, 0.05);
+    color: var(--white);
+    text-decoration: none;
+    font-family: 'Inter', sans-serif;
+    font-size: 0.875rem;
+    cursor: pointer;
+    transition: all 0.3s;
+}
+
+.resume-modal-btn:hover {
+    background: rgba(59, 130, 246, 0.15);
+    border-color: rgba(59, 130, 246, 0.4);
+}
+
+/* Close reads as an exit action, not "another tool" - the red matches the
+   site's existing burgundy accent instead of the shared blue hover. */
+.resume-modal-close:hover {
+    background: rgba(220, 38, 38, 0.15);
+    border-color: rgba(239, 68, 68, 0.5);
+}
+
+.resume-modal-body {
+    flex: 1;
+    width: 100%;
+    overflow: auto;
+    /* A lighter tint of the site's own navy, not the generic mid-grey every
+       native PDF viewer uses - that grey belongs to no palette, this one is
+       the site's. Pages are still pure white, so they need to read clearly
+       against it; this sits light enough for that while staying on-theme. */
+    background: #3d4a6b;
+    padding: 1.5rem;
+    display: flex;
+    /* Deliberately no justify-content: centring is left to the children's own
+       auto margins. justify-content: center also centres a line that has
+       overflowed, which pushes half the overflow past the left edge - and
+       scrollLeft stops at 0, so that half becomes unreachable. Auto margins
+       collapse to zero instead, putting every bit of the overflow on the
+       side scrolling can actually get to. */
+}
+
+.resume-loading {
+    margin: auto;
+    display: flex;
+    align-items: center;
+    gap: 0.75rem;
+    color: rgba(255, 255, 255, 0.7);
+    font-family: 'Inter', sans-serif;
+    font-size: 0.9rem;
+}
+
+.resume-spinner {
+    width: 18px;
+    height: 18px;
+    border-radius: 50%;
+    border: 2px solid rgba(255, 255, 255, 0.25);
+    border-top-color: var(--accent-blue);
+    animation: resume-spin 0.8s linear infinite;
+}
+
+@keyframes resume-spin {
+    to { transform: rotate(360deg); }
+}
+
+/* A transform paints at a new size but still occupies its old layout box, so
+   a scaled document would overflow this scroller without it ever growing a
+   scrollbar to match. js/main.js keeps this box at the group's scaled size,
+   which is what the scroll container actually measures.
+
+   margin:auto rather than the parent's justify-content: both centre it while
+   it fits, but auto margins collapse to zero once it doesn't - so an
+   overflowing page aligns to the start and every part of it stays reachable
+   by scrolling. Centring an overflowing flex item instead pushes half the
+   overflow off the left edge, where scrollLeft can't follow it. */
+.resume-zoom-sizer {
+    position: relative;
+    margin: auto;
+    flex: none;
+}
+
+/* The zoom target. Scaled via transform, not by resizing each page - one
+   transform on the whole document scales everything in a single paint instead
+   of relaying out every page on every wheel tick. Origin is top-left so all
+   the growth lands on the scrollable side; js/main.js compensates scroll on
+   both axes, keeping the line under the cursor put vertically and the page
+   centred horizontally. width:max-content keeps its measured size a function
+   of the pages alone, not of the sizer it lives in. */
+.resume-zoom-group {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: max-content;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 1rem;
+    transform-origin: 0 0;
+}
+
+.resume-page-wrap {
+    position: relative;
+    flex-shrink: 0;
+}
+
+/* PDF.js renders one <canvas> per page in here. A page-turn look (tinted
+   well, white pages, a gap between them) reads more like a document than a
+   single stretched image would. */
+.resume-page {
+    display: block;
+    background: var(--white);
+    box-shadow: 0 4px 20px rgba(0, 0, 0, 0.4);
+}
+
+/* Selectable, invisible text sitting exactly over the canvas glyphs it
+   mirrors - PDF.js's own positioning, this is just the minimal styling it
+   expects (mirrors pdf.js's own text_layer_builder.css, not vendored
+   wholesale since only these few rules are actually needed here). */
+.resume-text-layer {
+    position: absolute;
+    inset: 0;
+    overflow: hidden;
+    line-height: 1;
+}
+
+.resume-text-layer span,
+.resume-text-layer br {
+    color: transparent;
+    position: absolute;
+    white-space: pre;
+    cursor: text;
+    transform-origin: 0 0;
+}
+
+.resume-text-layer ::selection {
+    background: rgba(59, 130, 246, 0.35);
+}
+
+/* Invisible except on hover, where a faint highlight is the only way a
+   visitor would otherwise know a link is there at all. */
+.resume-link-layer {
+    position: absolute;
+    inset: 0;
+    pointer-events: none;
+}
+
+.resume-link-layer a {
+    position: absolute;
+    display: block;
+    pointer-events: auto;
+    border-radius: 3px;
+}
+
+.resume-link-layer a:hover {
+    background: rgba(59, 130, 246, 0.15);
+    outline: 1px solid rgba(59, 130, 246, 0.4);
+}
+
+/* Same-origin PDF, so the fallback iframe below still works everywhere -
+   it only appears if PDF.js itself fails to load or render. */
+.resume-modal-body iframe {
+    flex: 1;
+    width: 100%;
+    height: 100%;
+    border: 0;
+    background: var(--white);
+}
+
+@media (max-width: 768px) {
+    /* Full-screen on a phone - there's no spare margin around a panel to
+       show a backdrop through, and a fixed max-width would just waste
+       width the résumé needs to stay readable. */
+    .resume-modal {
+        padding: 0;
+    }
+
+    .resume-modal-panel {
+        max-width: 100%;
+        height: 100%;
+        border-radius: 0;
+    }
+
+    /* Print relies on the browser's own print pipeline, which mobile
+       Safari/Chrome hand off to sheet/share flows rather than a clean
+       print-to-PDF - inconsistent enough to skip. Download still gives a
+       phone visitor the file directly. */
+    [data-resume-print] {
+        display: none;
+    }
+
+    /* Panning is the browser's job and it does it better than script can;
+       pinch-zoom is declined, because the browser's version scales the whole
+       page - viewer chrome included - and magnifies the canvas as a bitmap
+       instead of letting the resolution underneath show. js/main.js
+       reimplements the gesture against the real zoom. */
+    .resume-modal-body {
+        touch-action: pan-x pan-y;
+        /* 1.5rem a side is 12% of a phone's width spent on margin around a
+           document that is already scaled down to fit. */
+        padding: 0.5rem;
+    }
+}
+
+/* Printing the canvases directly (not the modal chrome) is what makes this
+   independent of a native PDF-viewer print button.
+
+   Deliberately not scoped to "the viewer is open": Ctrl+P while reading the
+   résumé has to produce the same sheet the Print button does, and the browser
+   gives no way to tell the two apart. The cost is that printing the portfolio
+   itself comes out blank, which is the right trade - nobody prints a
+   portfolio, and a blank page is a clearer "that is not a thing" than three
+   pages of dark background would be.
+   ------------------------------------------------------------------------- */
+@media print {
+    /* The résumé is an A4 document and has to print as one. Without this the
+       sheet is whatever the driver defaults to - Letter, or Legal in a lot of
+       offices - and an A4-shaped canvas scaled to a differently-shaped sheet
+       reflows off the bottom of each page and onto the next, which is how a
+       clean two-page résumé turns into cropped thirds.
+
+       Zero margin because the résumé already carries its own: the PDF's
+       margins are part of the document, and adding the browser's on top would
+       shrink the content and reintroduce the same overflow. */
+    @page {
+        size: A4;
+        margin: 0;
+    }
+
+    body > *:not(.resume-modal) {
+        display: none !important;
+    }
+
+    .resume-modal {
+        position: static;
+        display: block !important;
+        padding: 0;
+    }
+
+    .resume-modal-backdrop,
+    .resume-modal-bar {
+        display: none;
+    }
+
+    .resume-modal-panel {
+        position: static;
+        height: auto;
+        max-width: 100%;
+        border: 0;
+        box-shadow: none;
+        border-radius: 0;
+        overflow: visible;
+    }
+
+    .resume-modal-body {
+        background: none;
+        padding: 0;
+        overflow: visible;
+        display: block;
+    }
+
+    /* On-screen zoom and the interactive layers mean nothing on paper. The
+       sizer hands its reserved space back and the group returns to normal
+       flow, so what gets printed is the pages themselves and nothing else. */
+    .resume-zoom-sizer {
+        position: static;
+        width: 100% !important;
+        height: auto !important;
+        margin: 0;
+    }
+
+    .resume-zoom-group {
+        position: static;
+        display: block;
+        width: 100%;
+        gap: 0;
+        transform: none !important;
+    }
+
+    /* One page, one sheet. Sized as a percentage rather than left at the
+       pixel width it was rasterised to, because that width is a function of
+       how wide the browser window happened to be when the résumé was opened -
+       so the printed result used to shrink or grow with the window. A4 canvas
+       at 100% of a zero-margin A4 sheet lands exactly. */
+    .resume-page-wrap {
+        width: 100% !important;
+        /* 100vh is the page box in paged media, so each wrapper is exactly one
+           sheet and nothing can spill a few pixels onto the next one. */
+        height: 100vh !important;
+        overflow: hidden;
+        break-inside: avoid;
+        page-break-inside: avoid;
+    }
+
+    /* Between pages, not after every page - page-break-after: always on the
+       last one produced a trailing blank sheet. */
+    .resume-page-wrap + .resume-page-wrap {
+        break-before: page;
+        page-break-before: always;
+    }
+
+    .resume-text-layer,
+    .resume-link-layer {
+        display: none;
+    }
+
+    /* !important because js/main.js sets the canvas's width and height as
+       inline styles, in the CSS pixels it was rasterised at - a size derived
+       from how wide the browser window was when the résumé was opened. An
+       unqualified rule loses to that, which is what left an 833px canvas on a
+       794px A4 sheet: five percent clipped off the right edge, and enough
+       overhang at the bottom to push a third sheet out of a two-page résumé.
+       object-fit keeps the page's own proportions while it scales. */
+    .resume-page {
+        box-shadow: none;
+        display: block;
+        width: 100% !important;
+        height: 100% !important;
+        object-fit: contain;
+        object-position: top center;
+    }
+}
+
+/* =========================================================================
+   Reduced motion
+   Honours the OS-level "reduce motion" preference. The decorative background
+   rotation/pulse, the floating cards, and the scroll-cue bounce are all
+   ambient - none of them carry information, so they stop entirely rather
+   than run faster. Scroll-triggered reveals are handled in js/main.js.
+   ========================================================================= */
+@media (prefers-reduced-motion: reduce) {
+    *,
+    *::before,
+    *::after {
+        animation-duration: 0.001ms !important;
+        animation-iteration-count: 1 !important;
+        transition-duration: 0.001ms !important;
+        scroll-behavior: auto !important;
+    }
+
+    .bg-animation::before,
+    .bg-animation::after {
+        animation: none !important;
+    }
+}
+
+
+/* =========================================================================
+   Phone layout
+   Everything below is scoped to phone widths and changes nothing above them.
+   The desktop layout is the one this site was designed at and it holds up;
+   these rules exist because the same content on a 390px-wide screen was
+   twenty-one screens of scrolling, most of it before the visitor reached a
+   single project.
+
+   Kept in one block at the end rather than spread through the file, so the
+   phone-specific behaviour can be read - and reverted - as a single unit.
+   ========================================================================= */
+
+/* -------------------------------------------------------------------------
+   Hero: tagline first, description after the photo
+   The description is four-fifths of the hero's height on a phone and pushed
+   the photo, the name and the CTAs below the fold - so the first thing a
+   visitor arriving from a LinkedIn link saw was a wall of body copy. Moving
+   it below the card puts the headline, the buttons and a face on the first
+   screen, with the description immediately under them for anyone who scrolls.
+
+   display:contents on .hero-left dissolves that wrapper so its children and
+   the profile card become siblings in one column, which is what makes them
+   orderable against each other. The wrapper carries no styling of its own
+   below 1024px beyond the flex centring being replaced here.
+   ------------------------------------------------------------------------- */
+@media (max-width: 768px) {
+    #hero {
+        padding: 6.5rem 1.5rem 3rem;
+    }
+
+    .hero-content {
+        display: flex;
+        flex-direction: column;
+        gap: 1.75rem;
+    }
+
+    .hero-left {
+        display: contents;
+    }
+
+    .hero-badge { order: 1; }
+    .hero-left h1 { order: 2; }
+    .cta-buttons { order: 3; }
+    .hero-right { order: 4; }
+    .hero-left p { order: 5; }
+
+    /* A grid/flex item is blockified, so the pill would otherwise stretch to
+       the full width of the column instead of hugging its text. */
+    .hero-badge {
+        align-self: center;
+        margin-bottom: 0;
+    }
+
+    .hero-left h1 {
+        font-size: 2.25rem;
+        margin-bottom: 0;
+    }
+
+    /* Now supporting text below the fold rather than the hero's centrepiece,
+       so it reads at body size instead of display size. */
+    .hero-left p {
+        font-size: 1rem;
+        line-height: 1.65;
+        margin-bottom: 0;
+        color: rgba(255, 255, 255, 0.62);
+    }
+
+    /* Side by side rather than stacked full-width: two taps of equal weight,
+       and it saves a whole button's height off the first screen. */
+    .cta-buttons {
+        display: flex;
+        flex-direction: row;
+        gap: 0.75rem;
+        width: 100%;
+    }
+
+    .cta-buttons .btn {
+        flex: 1 1 0;
+        justify-content: center;
+        padding: 0.875rem 1rem;
+        text-align: center;
+    }
+
+    .hero-right {
+        display: flex;
+        justify-content: center;
+    }
+
+    .profile-card {
+        max-width: 300px;
+        height: 360px;
+    }
+
+    .profile-photo {
+        width: 140px;
+        height: 140px;
+        margin: 1.5rem auto 1rem;
+    }
+
+    .profile-stats {
+        margin-top: 1rem;
+    }
+}
+
+@media (max-width: 480px) {
+    .hero-left h1 {
+        font-size: 2rem;
+    }
+
+    /* Overrides the stacked full-width buttons from the base 480 rules -
+       superseded by the row layout above, which the hero needs more. */
+    .cta-buttons {
+        flex-direction: row;
+    }
+
+    .cta-buttons .btn {
+        width: auto;
+        font-size: 0.9375rem;
+    }
+}
+
+/* -------------------------------------------------------------------------
+   Section rhythm
+   The generous vertical spacing is what stops the desktop layout feeling
+   cramped on a wide monitor. On a phone the same values are 8rem of empty
+   space above and below every section plus 5rem under each heading - about
+   1300px of scrolling, four full screens, spent on nothing but air.
+   Proportionally the same breathing room, at phone scale.
+   ------------------------------------------------------------------------- */
+@media (max-width: 768px) {
+    #about,
+    #projects,
+    #publications,
+    #contact {
+        padding: 4rem 1.5rem;
+        /* The desktop layout clears the fixed nav on the strength of its 8rem
+           top padding alone. At 4rem it no longer does, so a tap on a nav link
+           landed the section's badge behind the bar. This offsets the jump
+           rather than adding the height back. */
+        scroll-margin-top: 5.5rem;
+    }
+
+    .section-header {
+        margin-bottom: 2.5rem;
+    }
+
+    .section-badge {
+        margin-bottom: 1rem;
+    }
+
+    .section-title {
+        margin-bottom: 0.75rem;
+    }
+
+    .section-subtitle {
+        font-size: 1rem;
+        line-height: 1.5;
+    }
+
+    /* 2.5rem of padding a side leaves 262px of usable width on a 390px phone,
+       which is narrow enough that most card titles broke across three lines.
+       Reclaiming half of it, and dropping the display-sized heading to
+       something proportional to the column it now sits in, gets nearly all of
+       them down to two. */
+    .project-card {
+        padding: 1.5rem 1.25rem;
+    }
+
+    .project-card h3 {
+        font-size: 1.375rem;
+        margin-bottom: 0.75rem;
+    }
+
+    .project-card p {
+        font-size: 0.9375rem;
+        line-height: 1.65;
+        margin-bottom: 1rem;
+    }
+
+    .project-groups h4 {
+        font-size: 1rem;
+    }
+
+    .project-groups li {
+        font-size: 0.9rem;
+        line-height: 1.6;
+    }
+
+    /* Left readable and left whole. This is the only prose on the page that
+       explains the move from analog IC design into ML, which is the part of
+       the story a reader can't reconstruct from a list of projects - so it
+       gets set tighter rather than folded behind a control like the project
+       detail is. 1.125rem/1.8 is desktop measure; at 342px it ran to a
+       28-line column. */
+    .about-content p {
+        font-size: 0.9375rem;
+        line-height: 1.7;
+        margin-bottom: 1rem;
+    }
+
+    .tech-category {
+        padding: 1rem 1.25rem;
+    }
+
+    .tech-category h4 {
+        font-size: 1rem;
+        margin-bottom: 0.5rem;
+    }
+
+    .tech-item {
+        padding: 0.4rem 0.8rem;
+        font-size: 0.8125rem;
+    }
+
+    /* Fourteen tags wrapped to four rows of pills on ASCEND, which read as
+       clutter under a card that is already the densest on the page - and the
+       four skill categories in About stacked the same way. One scrollable row
+       keeps every tag reachable at a fixed cost in height; the fade is what
+       says there is more of it to the right. */
+    .project-tech,
+    .tech-items {
+        flex-wrap: nowrap;
+        overflow-x: auto;
+        scrollbar-width: none;
+        -webkit-overflow-scrolling: touch;
+        /* Both edges are square by default and js/main.js softens whichever
+           one still has content behind it. A fade that is always on the right
+           says "there is more" even when you have reached the end, and says
+           nothing at all on the left once you have scrolled away from it -
+           so it is wrong in both directions at once. This way the soft edge
+           only ever means "keep going", and a hard edge is a wall. */
+        --m-fade-start: 0px;
+        --m-fade-end: 0px;
+        -webkit-mask-image: linear-gradient(to right,
+            transparent 0,
+            #000 var(--m-fade-start),
+            #000 calc(100% - var(--m-fade-end)),
+            transparent 100%);
+        mask-image: linear-gradient(to right,
+            transparent 0,
+            #000 var(--m-fade-start),
+            #000 calc(100% - var(--m-fade-end)),
+            transparent 100%);
+        transition: --m-fade-start 0.2s linear, --m-fade-end 0.2s linear;
+    }
+
+    /* 1.75rem is about one pill's worth of softening - enough to register
+       without reading as a deliberate graphic element. */
+    .m-scroll-start {
+        --m-fade-start: 1.75rem;
+    }
+
+    .m-scroll-end {
+        --m-fade-end: 1.75rem;
+    }
+
+    /* A nowrap row's min-content width is the whole row, and grid and flex
+       children default to min-width:auto - a floor that a 1fr track cannot
+       size below. Without this the tag row propagated its full 624px up
+       through every ancestor, so the About column laid out 666px wide inside
+       a 294px grid and had its right-hand side clipped away at the root.
+       (The project cards escaped it only because .project-card already has
+       overflow:hidden, which zeroes that contribution.) */
+    .about-content,
+    .tech-stack,
+    .tech-category,
+    .tech-items,
+    .project-tech {
+        min-width: 0;
+    }
+
+    /* Bare text links at their natural line height are a 20px-tall target,
+       which is fine to click and awkward to tap. Padding rather than a larger
+       font, so the card's typography is unchanged. */
+    .project-links {
+        gap: 0.5rem;
+    }
+
+    .project-links a {
+        display: inline-flex;
+        align-items: center;
+        min-height: 44px;
+        padding: 0 0.5rem;
+        margin-left: -0.5rem;
+    }
+
+    /* Same for the email address - it sits in a large tile, but only the text
+       itself was tappable. */
+    .info-item a {
+        display: inline-flex;
+        align-items: center;
+        min-height: 44px;
+    }
+
+    .project-tech::-webkit-scrollbar,
+    .tech-items::-webkit-scrollbar {
+        display: none;
+    }
+
+    .project-tech .tech-tag,
+    .tech-items .tech-item {
+        flex: 0 0 auto;
+    }
+}
+
+/* -------------------------------------------------------------------------
+   Expand/collapse controls
+   One shared control for "there is more of this if you want it". Everything
+   it governs is fully present in the markup and only folded away by a class
+   js/main.js adds at phone widths - so a visitor without JS, a crawler, or
+   anyone printing the page gets the whole thing, and nothing here changes
+   what the desktop layout shows.
+   ------------------------------------------------------------------------- */
+@media (max-width: 768px) {
+    [data-m-collapse].m-collapsed {
+        display: none;
+    }
+
+    /* Prose gets clipped to a few lines rather than hidden outright - a card
+       with no description at all is a worse trade than a shortened one. */
+    [data-m-clamp].m-collapsed {
+        display: -webkit-box;
+        -webkit-box-orient: vertical;
+        -webkit-line-clamp: 3;
+        line-clamp: 3;
+        overflow: hidden;
+    }
+
+    /* Reads as a link, not a button. A bordered pill this size competed with
+       the card's own tags and its call-to-action links for attention, and it
+       is neither - it is a quiet "there is more of this if you want it". The
+       44px target is kept as padding, so the hit area stays thumb-sized while
+       the mark on screen is just a word and a caret. */
+    .m-toggle {
+        display: inline-flex;
+        align-items: center;
+        gap: 0.35rem;
+        margin-top: 0.15rem;
+        /* Project cards paint a glow layer over their own background, and
+           every text element in them carries z-index: 2 to sit above it. The
+           toggle did not, so the overlay took the tap and the button looked
+           dead - which is exactly what it was. */
+        position: relative;
+        z-index: 2;
+        min-height: 44px;
+        padding: 0 0.25rem 0 0;
+        border: 0;
+        background: none;
+        color: var(--accent-blue);
+        font-family: 'Inter', sans-serif;
+        font-size: 0.8125rem;
+        font-weight: 600;
+        cursor: pointer;
+    }
+
+    /* Rotates to point up once its section is open, so the control says which
+       way it will move things rather than just "toggle". */
+    .m-toggle::after {
+        content: '';
+        width: 0.35rem;
+        height: 0.35rem;
+        border-right: 1.5px solid currentColor;
+        border-bottom: 1.5px solid currentColor;
+        transform: translateY(-1px) rotate(45deg);
+        transition: transform 0.25s ease;
+    }
+
+    .m-toggle[aria-expanded="true"]::after {
+        transform: translateY(1px) rotate(-135deg);
+    }
+}
+
+/* -------------------------------------------------------------------------
+   Projects: five up front, the rest one tap away
+   Eleven cards is 12.8 screens of phone scrolling - more than half the whole
+   page, and enough that the publications and contact sections below were
+   effectively unreachable. The five that lead are the ones that carry the
+   story: current work, the published research, and one project each from
+   agents, deep learning and silicon.
+
+   Ordered rather than reordered in the markup, so the desktop sequence - which
+   is tuned to how the cards tile in a two-column grid - stays exactly as it is.
+   ------------------------------------------------------------------------- */
+@media (max-width: 768px) {
+    .project-card[data-m-order="1"] { order: 1; }
+    .project-card[data-m-order="2"] { order: 2; }
+    .project-card[data-m-order="3"] { order: 3; }
+    .project-card[data-m-order="4"] { order: 4; }
+    .project-card[data-m-order="5"] { order: 5; }
+
+    /* The six behind the control need an order too. Without one they default
+       to 0 - which sorts them ahead of the five, so revealing them dropped
+       them in above the cards they were supposed to follow. Equal values keep
+       document order among themselves, so one number is enough for all six. */
+    .project-card:not([data-m-order]) { order: 6; }
+
+    /* .m-curated is added by js/main.js. Without it - scripts blocked, or the
+       file never arrived - every card stays visible rather than six of them
+       being hidden with no control to bring them back. */
+    .projects-grid.m-curated:not(.m-expanded) .project-card:not([data-m-order]) {
+        display: none;
+    }
+
+    /* This one keeps the button look: it is the section's own control rather
+       than a note inside a card, and it has the width to carry it. */
+    .m-show-all {
+        display: flex;
+        justify-content: center;
+        width: 100%;
+        margin: 1.25rem 0 0;
+        padding: 0.85rem 1rem;
+        border: 1px solid rgba(59, 130, 246, 0.35);
+        border-radius: 10px;
+        background: rgba(59, 130, 246, 0.08);
+        font-size: 0.875rem;
+    }
+}
+
+/* -------------------------------------------------------------------------
+   Type scale
+   The desktop sizes are a display scale - they are meant to be read from
+   arm's length across a wide layout. Carried onto a 390px screen held a foot
+   from your face they are simply loud: a 32px section title, a 28px
+   publication heading that ran to five lines and 328px of height on its own.
+
+   Everything here is a step down in size only. No weights, colours, families
+   or spacing relationships change, so the page still reads as the same page.
+   ------------------------------------------------------------------------- */
+@media (max-width: 768px) {
+    /* The headline says the same thing, in the visitor's own words rather
+       than a slogan, and the screen is needed elsewhere. */
+    .hero-badge {
+        display: none;
+    }
+
+    .m-trim {
+        display: none;
+    }
+
+    .hero-left h1 {
+        font-size: 1.875rem;
+    }
+
+    .hero-left p {
+        font-size: 0.875rem;
+        line-height: 1.6;
+    }
+
+    .btn {
+        font-size: 0.875rem;
+    }
+
+    .section-title {
+        font-size: 1.625rem;
+    }
+
+    .section-subtitle {
+        font-size: 0.875rem;
+    }
+
+    .section-badge {
+        font-size: 0.75rem;
+        padding: 0.35rem 0.9rem;
+    }
+
+    .project-badge {
+        font-size: 0.6875rem;
+    }
+
+    .project-card h3 {
+        font-size: 1.1875rem;
+    }
+
+    .project-card p {
+        font-size: 0.875rem;
+    }
+
+    .project-links a,
+    .proprietary {
+        font-size: 0.875rem;
+    }
+
+    .tech-tag {
+        font-size: 0.75rem;
+        padding: 0.3rem 0.7rem;
+    }
+
+    .about-content p {
+        font-size: 0.875rem;
+    }
+
+    .tech-category h4 {
+        font-size: 0.9375rem;
+    }
+
+    .tech-item {
+        font-size: 0.75rem;
+    }
+
+    /* The single worst offender: a 28px heading on a 97-character title is
+       five lines and 328px before the card has said anything else. */
+    .publication-card {
+        padding: 1.25rem;
+        gap: 1rem;
+    }
+
+    .publication-card h3 {
+        font-size: 1.125rem;
+        line-height: 1.35;
+    }
+
+    .publication-icon {
+        font-size: 1.75rem;
+    }
+
+    .publication-meta {
+        font-size: 0.8125rem;
+    }
+
+    .publication-card .authors,
+    .publication-card .description {
+        font-size: 0.8125rem;
+        line-height: 1.55;
+    }
+
+    .publication-links a {
+        font-size: 0.8125rem;
+    }
+
+    .info-item a {
+        font-size: 0.875rem;
+    }
+
+    footer,
+    footer p {
+        font-size: 0.8125rem;
+    }
+}
+
+/* -------------------------------------------------------------------------
+   Contact: four icons
+   A phone gets the mail card and loses the address tile, so the section is one
+   row of four marks - mail, LinkedIn, GitHub, Scholar - instead of a tile plus
+   a 2x2 grid of labelled cards. The résumé card goes too: the quick-action bar
+   is pinned to the bottom of the screen carrying exactly that link, and
+   offering it twice within a thumb's reach of each other is just noise.
+   ------------------------------------------------------------------------- */
+@media (max-width: 768px) {
+    .contact-left,
+    .social-card-resume {
+        display: none;
+    }
+
+    .social-card-mail {
+        display: flex;
+    }
+
+    .social-grid {
+        grid-template-columns: repeat(4, minmax(0, 1fr));
+        gap: 0.5rem;
+        max-width: 100%;
+    }
+
+    /* The mark is the label. Four of them read faster than four captions, and
+       @msarmadsohail under two different icons was never telling anyone
+       anything they could not see from the icon itself. */
+    .social-handle {
+        display: none;
+    }
+
+    /* min-height rather than aspect-ratio: these are grid items and stretch to
+       their row, so the ratio never gets a free dimension to resolve against
+       and the card collapsed to the height of the icon. */
+    .social-card {
+        min-height: 52px;
+        padding: 0.75rem 0;
+    }
+
+    .social-icon {
+        margin-bottom: 0;
+    }
+
+    .social-svg {
+        width: 1.5rem;
+        height: 1.5rem;
+    }
+}
+
+/* -------------------------------------------------------------------------
+   Tighter spacing
+   A phone is held close and has no width to give away. The desktop gutters are
+   sized against a 1400px canvas; at 390px the same values are most of the
+   screen's margin budget spent before any content starts.
+   ------------------------------------------------------------------------- */
+@media (max-width: 768px) {
+    #hero {
+        padding: 5.5rem 1rem 2rem;
+    }
+
+    .container,
+    #about,
+    #projects,
+    #publications,
+    #contact {
+        padding-left: 1rem;
+        padding-right: 1rem;
+    }
+
+    #about,
+    #projects,
+    #publications,
+    #contact {
+        padding-top: 3rem;
+        padding-bottom: 3rem;
+    }
+
+    /* .container sits inside the section, so both were paying the gutter and
+       the content ended up inset twice. */
+    #about .container,
+    #projects .container,
+    #publications .container,
+    #contact .container {
+        padding-left: 0;
+        padding-right: 0;
+    }
+
+    .section-header {
+        margin-bottom: 1.75rem;
+    }
+
+    .hero-content {
+        gap: 1.25rem;
+    }
+
+    .about-grid,
+    .projects-grid {
+        gap: 1rem;
+    }
+
+    .tech-stack {
+        gap: 0.75rem;
+    }
+
+    .project-card {
+        padding: 1.25rem 1rem;
+    }
+
+    .tech-category {
+        padding: 0.875rem 1rem;
+    }
+}
+
+/* -------------------------------------------------------------------------
+   Card chrome, trimmed
+   Small things that read as detail on a desktop card and as clutter in a
+   360px column.
+   ------------------------------------------------------------------------- */
+@media (max-width: 768px) {
+    /* "Proprietary" and "NCDC" are footnotes about where the work lives. On a
+       phone they cost a whole line of the card for something nobody is
+       deciding anything from. Desktop keeps them. */
+    .proprietary {
+        display: none;
+    }
+
+    /* Four links wrapped to two rows on the MEC-NOMA card, and a wrapped row
+       of link chips reads as a broken layout rather than a list. Dropping the
+       leading emoji from each buys back about a character and a half apiece,
+       which is enough to bring all four back onto one line - and the words
+       were already saying what the pictures said. */
+    .project-links a > span[aria-hidden="true"],
+    .publication-links a span[aria-hidden="true"] {
+        display: none;
+    }
+
+    .project-links {
+        gap: 0.25rem;
+    }
+
+    /* Hiding .proprietary can leave its row with nothing in it - on ASCEND and
+       the RFID card that footnote was the only thing there - and an empty flex
+       row still draws its share of the card's trailing space. :has() is a
+       progressive enhancement here: where it is not supported the rule is
+       dropped and the card just keeps the gap it has today. */
+    .project-links:not(:has(a)) {
+        display: none;
+    }
+}
+
+/* -------------------------------------------------------------------------
+   Publications, at phone weight
+   The card is the page's one piece of formal credentialling and it was
+   dressed like it: a display-sized title, pill-shaped metadata and three link
+   chips all at desktop padding, wrapped around four lines of description. All
+   of it still reads at two thirds the size.
+   ------------------------------------------------------------------------- */
+@media (max-width: 768px) {
+    .publication-content h3 {
+        font-size: 1.0625rem;
+    }
+
+    .publication-meta {
+        gap: 0.4rem;
+        margin-bottom: 0.75rem;
+    }
+
+    .publication-meta span {
+        padding: 0.2rem 0.55rem;
+        font-size: 0.6875rem;
+    }
+
+    /* The venue pill already carries the year - "IEEE WCNC 2024" - so the
+       separate date says it twice in a row with no width to spare. */
+    .publication-meta .date {
+        display: none;
+    }
+
+    /* Bare text links rather than chips, matching how the project cards
+       already present theirs. Shrinking the chips far enough to stop being
+       "too huge" left them below a thumb's size; dropping the box instead
+       makes them lighter still and lets the 44px target come back as
+       invisible padding. */
+    .publication-links {
+        gap: 1rem;
+    }
+
+    .publication-links a {
+        display: inline-flex;
+        align-items: center;
+        min-height: 44px;
+        padding: 0;
+        border: 0;
+        background: none;
+        border-radius: 0;
+        font-size: 0.8125rem;
+    }
+}
+
+/* -------------------------------------------------------------------------
+   Contact icons: room between them
+   Four targets in a row with nothing but a hairline between them - a thumb
+   aimed at LinkedIn could land on GitHub. The icons are the right size, so
+   the separation comes out of the row's width rather than theirs: it is the
+   dead space between targets that prevents the mis-tap.
+   ------------------------------------------------------------------------- */
+@media (max-width: 768px) {
+    .social-grid {
+        gap: 1rem;
+    }
+}
+
+/* -------------------------------------------------------------------------
+   Reveals, softened
+   The reveal distances are tuned to a desktop viewport: 100px of travel over
+   a second reads as a considered entrance across a wide two-column grid. In a
+   390px column the same numbers are a quarter of the screen's width sliding
+   about, and the horizontal ones in particular fight the scroll they were
+   triggered by. Shorter travel over half the time keeps the page feeling
+   alive without it feeling like it is still assembling itself.
+
+   Every element uses the same vertical entrance here rather than each keeping
+   its own direction - the left/right pairings exist to animate two columns
+   towards each other, and there is only one column at this width.
+
+   Hidden states are updated to match the new from-frame; a mismatch there is
+   a visible jump at the moment the animation takes over.
+   ------------------------------------------------------------------------- */
+@media (max-width: 768px) {
+    html.js .project-card:not(.is-visible),
+    html.js .publication-card:not(.is-visible),
+    html.js .contact-left:not(.is-visible),
+    html.js .contact-right:not(.is-visible),
+    html.js .social-card:not(.is-visible) {
+        transform: translateY(16px);
+    }
+
+    html.js .project-card.is-visible,
+    html.js .publication-card.is-visible,
+    html.js .contact-left.is-visible,
+    html.js .contact-right.is-visible,
+    html.js .social-card.is-visible {
+        animation: reveal-late-in 0.45s cubic-bezier(0.25, 0.46, 0.45, 0.94) backwards;
+    }
+}
+
+/* -------------------------------------------------------------------------
+   Quick actions
+   Built by js/main.js once the hero has been scrolled past. z-index sits well
+   under the résumé modal's, so opening the viewer covers it rather than
+   leaving it floating over the backdrop.
+   ------------------------------------------------------------------------- */
+@media (max-width: 768px) {
+    .m-quickbar {
+        position: fixed;
+        left: 0;
+        right: 0;
+        bottom: 0;
+        z-index: 900;
+        display: flex;
+        gap: 0.75rem;
+        padding: 0.75rem 1rem;
+        /* Keeps the bar clear of the home indicator on a notched phone. */
+        padding-bottom: calc(0.75rem + env(safe-area-inset-bottom, 0px));
+        background: rgba(15, 23, 42, 0.92);
+        backdrop-filter: blur(16px);
+        border-top: 1px solid rgba(255, 255, 255, 0.1);
+        transform: translateY(110%);
+        transition: transform 0.3s ease;
+    }
+
+    .m-quickbar-on .m-quickbar {
+        transform: translateY(0);
+    }
+
+    /* Only reserved while the bar is actually out, so the page doesn't carry
+       a strip of dead space at the bottom before it has ever appeared. */
+    .m-quickbar-on footer {
+        padding-bottom: calc(5rem + env(safe-area-inset-bottom, 0px));
+    }
+
+    .m-quickbar-btn {
+        flex: 1 1 0;
+        display: inline-flex;
+        align-items: center;
+        justify-content: center;
+        padding: 0.8rem 1rem;
+        border-radius: 12px;
+        border: 1px solid rgba(255, 255, 255, 0.18);
+        background: rgba(255, 255, 255, 0.06);
+        color: var(--white);
+        text-decoration: none;
+        font-family: 'Inter', sans-serif;
+        font-size: 0.9375rem;
+        font-weight: 600;
+    }
+
+    .m-quickbar-primary {
+        background: linear-gradient(135deg, var(--accent-blue), var(--burgundy-light));
+        border-color: transparent;
+    }
+}

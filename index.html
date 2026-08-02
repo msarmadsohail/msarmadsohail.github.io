@@ -1,0 +1,619 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    <!-- Gates the scroll-reveal styles in css/style.css. Without this class
+         nothing on the page is ever hidden, so scripts being blocked leaves a
+         readable page rather than a blank one. The timer is the second half of
+         that guarantee: if js/main.js never arrives, the class comes back off
+         and everything appears. main.js clears the timer as its first action. -->
+    <script>
+        document.documentElement.classList.add('js');
+        window.__revealFallback = window.setTimeout(function () {
+            document.documentElement.classList.remove('js');
+        }, 2500);
+    </script>
+    <title>Muhammad Sarmad Sohail | Data Scientist</title>
+    <meta name="description" content="Data scientist working on synthetic data generation and ML systems, with an electrical engineering foundation from NUST. Generative models for tabular data and the distributed pipelines that profile, generate and evaluate synthetic data at scale.">
+    <meta name="author" content="Muhammad Sarmad Sohail">
+    <link rel="canonical" href="https://msarmadsohail.github.io/">
+
+    <!-- Open Graph / LinkedIn / Facebook -->
+    <meta property="og:type" content="website">
+    <meta property="og:url" content="https://msarmadsohail.github.io/">
+    <meta property="og:title" content="Muhammad Sarmad Sohail | Data Scientist">
+    <meta property="og:description" content="Synthetic data generation, generative models for tabular data, and the distributed pipelines that run them. IEEE WCNC 2024.">
+    <meta property="og:image" content="https://msarmadsohail.github.io/assets/og-image.png">
+    <meta property="og:image:width" content="1200">
+    <meta property="og:image:height" content="630">
+    <meta property="og:image:alt" content="Muhammad Sarmad Sohail, Data Scientist">
+    <meta property="og:site_name" content="Muhammad Sarmad Sohail">
+
+    <!-- Twitter/X -->
+    <meta name="twitter:card" content="summary_large_image">
+    <meta name="twitter:title" content="Muhammad Sarmad Sohail | Data Scientist">
+    <meta name="twitter:description" content="Synthetic data generation, generative models for tabular data, and ML systems. IEEE WCNC 2024.">
+    <meta name="twitter:image" content="https://msarmadsohail.github.io/assets/og-image.png">
+
+    <!-- Icons -->
+    <link rel="icon" type="image/png" sizes="32x32" href="assets/favicon-32.png">
+    <link rel="apple-touch-icon" sizes="180x180" href="assets/favicon-180.png">
+    <meta name="theme-color" content="#0a0e1a">
+
+    <!-- Fonts -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@300;400;500;600;700&family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
+
+    <!-- Styles -->
+    <link rel="stylesheet" href="css/style.css">
+
+    <!-- Structured data -->
+    <script type="application/ld+json">
+    {
+      "@context": "https://schema.org",
+      "@type": "Person",
+      "name": "Muhammad Sarmad Sohail",
+      "url": "https://msarmadsohail.github.io/",
+      "image": "https://msarmadsohail.github.io/assets/og-image.png",
+      "jobTitle": "Data Scientist",
+      "worksFor": { "@type": "Organization", "name": "Adept Tech Solutions" },
+      "alumniOf": { "@type": "CollegeOrUniversity", "name": "National University of Sciences and Technology (NUST)" },
+      "knowsAbout": ["Synthetic Data Generation", "Machine Learning", "Data Engineering", "Deep Reinforcement Learning", "PySpark", "Snowflake"],
+      "sameAs": [
+        "https://www.linkedin.com/in/msarmadsohail",
+        "https://github.com/msarmadsohail",
+        "https://scholar.google.com/citations?user=3DpcXZMAAAAJ"
+      ]
+    }
+    </script>
+</head>
+<body>
+    <div class="bg-animation"></div>
+    
+    <!-- Navigation -->
+    <nav id="navbar">
+        <div class="container">
+            <div class="logo">MS.</div>
+            <button class="nav-toggle" aria-label="Open navigation menu" aria-expanded="false" aria-controls="nav-links">
+                <span class="nav-toggle-bar" aria-hidden="true"></span>
+                <span class="nav-toggle-bar" aria-hidden="true"></span>
+                <span class="nav-toggle-bar" aria-hidden="true"></span>
+            </button>
+            <ul id="nav-links">
+                <li><a href="#hero">Home</a></li>
+                <li><a href="#about">About</a></li>
+                <li><a href="#projects">Projects</a></li>
+                <li><a href="#publications">Research</a></li>
+                <li><a href="#contact">Contact</a></li>
+            </ul>
+        </div>
+    </nav>
+
+    <!-- Hero Section -->
+    <section id="hero">
+        <div class="hero-content">
+            <div class="hero-left">
+                <div class="hero-badge">Work beyond boundaries</div>
+                <h1>Building <span class="highlight">Intelligent</span><br>Data Systems</h1>
+                <!-- .m-trim is dropped at phone widths, where the hero has one
+                     screen to introduce him and the first sentence does it.
+                     Kept in the markup rather than swapped for a shorter copy,
+                     so there is one version of this text, not two to keep in
+                     step - and crawlers and desktop still get all of it. -->
+                <p>Data scientist working on synthetic data generation and ML systems, with an electrical engineering foundation from NUST.<span class="m-trim"> Built generative models for tabular data, along with the distributed pipelines that profile, generate and evaluate synthetic data at scale.</span></p>
+                <div class="cta-buttons">
+                    <a href="#projects" class="btn btn-primary">
+                        <span>View Projects</span>
+                    </a>
+                    <a href="assets/M_SARMAD_SOHAIL_CV.pdf" class="btn btn-secondary" target="_blank" rel="noopener" data-resume-trigger>
+                        <span>View Resume</span>
+                    </a>
+                </div>
+            </div>
+            
+            <div class="hero-right">
+                <div class="profile-card">
+                    <div class="profile-inner">
+                        <div class="profile-glass">
+                            <picture>
+                                <source srcset="assets/profile.webp" type="image/webp">
+                                <img src="assets/profile.jpg" alt="Muhammad Sarmad Sohail" class="profile-photo" width="720" height="786" fetchpriority="high">
+                            </picture>
+                            <div class="profile-info">
+                                <h3>Muhammad Sarmad Sohail</h3>
+                                <p class="role">Data Scientist</p>
+                                <div class="profile-stats">
+                                    <!-- Both numbers are computed at runtime in js/main.js so they
+                                         cannot go stale: years from the first professional role,
+                                         project count from the cards actually on the page. -->
+                                    <div class="stat">
+                                        <div class="stat-number" data-stat="years">2</div>
+                                        <div class="stat-label">Years Exp</div>
+                                    </div>
+                                    <div class="stat">
+                                        <div class="stat-number">1</div>
+                                        <div class="stat-label">Publication</div>
+                                    </div>
+                                    <div class="stat">
+                                        <div class="stat-number" data-stat="projects">7</div>
+                                        <div class="stat-label">Projects</div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="scroll-indicator"></div>
+    </section>
+
+    <!-- About Section -->
+    <section id="about">
+        <div class="container">
+            <div class="section-header">
+                <div class="section-badge">Who I Am</div>
+                <h2 class="section-title">About Me</h2>
+                <p class="section-subtitle">Passionate about leveraging data and AI to solve complex problems at scale</p>
+            </div>
+            
+            <div class="about-grid">
+                <div class="about-content">
+                    <p>I'm a <span class="highlight-text">Data Scientist</span> at Adept Tech Solutions, working on ASCEND, a synthetic data platform. I build its production data modules and the rule-based generation engine<span class="m-trim"> that layers business logic on top of them</span>. Alongside that I research generative models for fraud detection,<span class="m-trim"> on financial, insurance and medical data</span> where the fraud cases are a small fraction of the population. Most of the work turns out to be deciding whether the data you generated is any good, which is harder than generating it.</p>
+
+                    <p>My background is <span class="highlight-text">Electrical Engineering at NUST</span>, where I published at IEEE WCNC 2024 on deep reinforcement learning for IoT networks. I came into ML from analog circuit design: SAR ADCs in TSMC 28nm and GF 22nm FD-SOI, and a passive RFID transponder in CMOS 65nm. That is why I am drawn to ML applied to hard physical problems<span class="m-trim">, from radar and signal processing to autonomy and instrumentation</span>.</p>
+
+                    <p>Outside work I build things end to end: a multi-agent job intelligence pipeline<span class="m-trim"> that runs unattended on a daily schedule</span>, and <span class="highlight-text">Lantern</span>, an open, model-agnostic coding agent. I was also named <span class="highlight-text">Top Performer</span> at the Pak Angels Generative AI Program, Cohort 6<span class="m-trim">, for work with BERT, LLaMA and LangChain</span>.</p>
+                </div>
+                
+                <div class="tech-stack">
+                    <div class="tech-category">
+                        <h4>Machine Learning</h4>
+                        <div class="tech-items">
+                            <span class="tech-item">PyTorch</span>
+                            <span class="tech-item">TensorFlow</span>
+                            <span class="tech-item">scikit-learn</span>
+                            <span class="tech-item">GANs</span>
+                            <span class="tech-item">cVAE</span>
+                            <span class="tech-item">Autoregressive</span>
+                            <span class="tech-item">Deep RL</span>
+                        </div>
+                    </div>
+
+                    <div class="tech-category">
+                        <h4>Data Engineering</h4>
+                        <div class="tech-items">
+                            <span class="tech-item">Python</span>
+                            <span class="tech-item">PySpark</span>
+                            <span class="tech-item">Snowflake</span>
+                            <span class="tech-item">PostgreSQL</span>
+                            <span class="tech-item">SQL</span>
+                            <span class="tech-item">ETL Pipelines</span>
+                            <span class="tech-item">FastAPI</span>
+                        </div>
+                    </div>
+
+                    <div class="tech-category">
+                        <h4>MLOps &amp; Cloud</h4>
+                        <div class="tech-items">
+                            <span class="tech-item">MLflow</span>
+                            <span class="tech-item">Optuna</span>
+                            <span class="tech-item">AWS</span>
+                            <span class="tech-item">Docker</span>
+                            <span class="tech-item">Kubernetes</span>
+                            <span class="tech-item">GitHub Actions</span>
+                        </div>
+                    </div>
+
+                    <div class="tech-category">
+                        <h4>LLM &amp; Agents</h4>
+                        <div class="tech-items">
+                            <span class="tech-item">RAG</span>
+                            <span class="tech-item">LangChain</span>
+                            <span class="tech-item">PydanticAI</span>
+                            <span class="tech-item">FAISS</span>
+                            <span class="tech-item">Embeddings</span>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Projects Section -->
+    <section id="projects">
+        <div class="container">
+            <div class="section-header">
+                <div class="section-badge">Portfolio</div>
+                <h2 class="section-title">Featured Projects</h2>
+                <p class="section-subtitle">Synthetic data, generative models, agents, and IC design</p>
+            </div>
+            
+            <div class="projects-grid">
+                <!-- 1. ASCEND (current work) -->
+                <!-- 1. ASCEND Synthetic Data Platform -->
+                <!-- data-m-order marks the cards that lead on a phone, where the
+                     full eleven is far more scrolling than anyone arriving from a
+                     link will do. Five carry the story; the rest stay one tap
+                     away. The attribute is inert above 768px. -->
+                <div class="project-card featured tall" data-m-order="1">
+                    <div class="project-glow"></div>
+                    <div class="project-header">
+                        <span class="project-badge">Synthetic Data Generation</span>
+                    </div>
+                    <h3>ASCEND Synthetic Data Platform</h3>
+                    <p>A platform that produces synthetic data for testing, development and analytics, from single flat files up to entire relational databases, without exposing real records. My work spans three connected tracks: the production data modules, the rule-based generation engine, and research on deep generative models.
+                    <div class="project-groups" data-m-collapse="Show breakdown">
+                      <div class="pg"><h4>Platform &amp; data modules</h4><ul>
+                        <li>Developed production-grade <strong>Python</strong> and <strong>FastAPI</strong> microservices for statistical analysis, preprocessing, data profiling, feature engineering, anonymization, curation, and synthetic data generation.</li>
+                        <li>Built synthetic data generation module for relational databases sourced from <strong>PostgreSQL</strong> or <strong>Snowflake</strong>, producing privacy-safe versions of complete multi-table schemas or generating them later from extracted data signatures.</li>
+                        <li>Implemented these capabilities as distributed <strong>PySpark</strong> jobs, orchestrating end-to-end ingestion, profiling, transformation, and generation workloads.</li>
+                      </ul></div>
+                      <div class="pg reveal-late"><h4>Rule-based generation engine</h4><ul>
+                        <li>Built the platform's <strong>rule-based generation engine</strong>, layering configurable business logic over statistical generation through conditional rules within tables and cross-table rules across related data.</li>
+                        <li>Implemented composite foreign-key resolution with per-parent cardinality defined as exact counts, ranges, or weighted distributions, keeping child records consistent with their corresponding count fields.</li>
+                        <li>Developed the downstream <strong>Payload Expert</strong> tool to assemble nested API payloads from source-agnostic flat generated tables and produce deliberately malformed variants with required fields dropped, wrong types and invalid enums, for negative testing of a consumer API.</li>
+                      </ul></div>
+                      <div class="pg reveal-late"><h4>Enhanced synthetic data generation</h4><ul>
+                        <li>Built and evaluated tabular <strong>synthetic data generators</strong> across three model families: <strong>GAN</strong>, <strong>autoregressive</strong>, and <strong>cVAE</strong>, for fraud detection on financial, insurance, and medical datasets under severe class imbalance.</li>
+                        <li>Optimized model performance through <strong>Optuna</strong>-driven hyperparameter sweeps, <strong>MLflow</strong> experiment tracking, and GPU-based training on <strong>AWS</strong> instances.</li>
+                        <li>Raised synthetic fidelity on a key transaction behaviour to <strong>98.78%</strong> (98.96% for real data) by correcting the training feature set.</li>
+                      </ul></div>
+                    </div></p>
+                    <div class="project-tech reveal-late">
+                        <span class="tech-tag">Python</span>
+                        <span class="tech-tag">FastAPI</span>
+                        <span class="tech-tag">PySpark</span>
+                        <span class="tech-tag">PostgreSQL</span>
+                        <span class="tech-tag">Snowflake</span>
+                        <span class="tech-tag">SQL</span>
+                        <span class="tech-tag">GANs</span>
+                        <span class="tech-tag">cVAE</span>
+                        <span class="tech-tag">Autoregressive</span>
+                        <span class="tech-tag">Optuna</span>
+                        <span class="tech-tag">MLflow</span>
+                        <span class="tech-tag">AWS</span>
+                        <span class="tech-tag">Docker</span>
+                        <span class="tech-tag">Kubernetes</span>
+                    </div>
+                    <div class="project-links">
+                        <span class="proprietary"><span aria-hidden="true">&#128274;</span> Proprietary</span>
+                    </div>
+                </div>
+
+                <!-- 2. CNN-LSTM for Video-Based Regression -->
+                <div class="project-card" data-m-order="4">
+                    <div class="project-glow"></div>
+                    <div class="project-header">
+                        <span class="project-badge">Deep Learning</span>
+                    </div>
+                    <h3>CNN-LSTM for Video-Based Regression</h3>
+                    <p>Novel Conv2D + LSTM architectures for video-based regression on the UBFC dataset, with custom video preprocessing and data-augmentation pipelines.</p>
+                    <div class="project-tech">
+                        <span class="tech-tag">PyTorch</span>
+                        <span class="tech-tag">Keras</span>
+                        <span class="tech-tag">CNN</span>
+                        <span class="tech-tag">LSTM</span>
+                    </div>
+                    <div class="project-links">
+                        <a href="https://github.com/msarmadsohail/cnn-lstm-human-action-recognition" target="_blank" rel="noopener"><span aria-hidden="true">&#128187;</span> Code</a>
+                    </div>
+                </div>
+
+                <!-- 3. Job Intelligence Agent -->
+                <div class="project-card" data-m-order="3" data-reveals-also=".reveal-late">
+                    <div class="project-glow"></div>
+                    <div class="project-header">
+                        <span class="project-badge">Multi-Agent</span>
+                    </div>
+                    <h3>Job Intelligence Agent</h3>
+                    <!-- The middle sentence is the mechanism; the phone keeps what it
+                         is and what it gives you, and drops how it works. Cut only -
+                         no word is moved or reworded, so desktop renders identically. -->
+                    <p>A multi-agent system that tracks job opportunities, running unattended on a daily cron. <span class="m-trim">Collectors pull listings from REST APIs, RSS feeds and HTML scraping, then a pipeline deduplicates them, embeds each posting with a sentence-transformer model, and ranks in two layers: cosine similarity against a target profile for recall, then LLM re-ranking over the shortlist. </span>Top matches arrive as a daily notification.</p>
+                    <div class="project-tech">
+                        <span class="tech-tag">Python</span>
+                        <span class="tech-tag">LLMs</span>
+                        <span class="tech-tag">Embeddings</span>
+                        <span class="tech-tag">SQL</span>
+                        <span class="tech-tag">GitHub Actions</span>
+                    </div>
+                </div>
+
+                <!-- 4. Real-Time Meeting Summarizer -->
+                <div class="project-card">
+                    <div class="project-glow"></div>
+                    <div class="project-header">
+                        <span class="project-badge">NLP</span>
+                    </div>
+                    <h3>Real-Time Meeting Summarizer</h3>
+                    <p>AI-powered transcription and summarization tool for meetings. Uses speech-to-text and LLM-based summarization for actionable insights.</p>
+                    <div class="project-tech">
+                        <span class="tech-tag">Whisper</span>
+                        <span class="tech-tag">LangChain</span>
+                        <span class="tech-tag">Streamlit</span>
+                    </div>
+                    <div class="project-links">
+                        <a href="https://github.com/msarmadsohail/pak-angels-genai-cohort6" target="_blank" rel="noopener"><span aria-hidden="true">&#128187;</span> Code</a>
+                    </div>
+                </div>
+
+                <!-- 5. ZeroPhish Gate -->
+                <div class="project-card">
+                    <div class="project-glow"></div>
+                    <div class="project-header">
+                        <span class="project-badge highlight"><span aria-hidden="true">&#127942;</span> Top Performer</span>
+                    </div>
+                    <h3>ZeroPhish Gate</h3>
+                    <p>Hybrid AI-powered phishing detection combining BERT and LLaMA for supply chain security. Built for the Pak Angels Generative AI Program.</p>
+                    <div class="project-tech">
+                        <span class="tech-tag">BERT</span>
+                        <span class="tech-tag">LLaMA</span>
+                        <span class="tech-tag">LangChain</span>
+                        <span class="tech-tag">Gradio</span>
+                    </div>
+                    <div class="project-links">
+                        <a href="https://github.com/msarmadsohail/pak-angels-genai-cohort6" target="_blank" rel="noopener"><span aria-hidden="true">&#128187;</span> Code</a>
+                        <a href="https://quiz.ideagist.com/ideagist-certificate/?cert_hash=16d330593ff3496c" target="_blank" rel="noopener"><span aria-hidden="true">&#127942;</span> Certificate</a>
+                    </div>
+                </div>
+
+                <!-- 6. Resource Allocation in MEC-NOMA Networks -->
+                <div class="project-card featured" data-m-order="2">
+                    <div class="project-glow"></div>
+                    <div class="project-header">
+                        <span class="project-badge">Research</span>
+                        <span class="project-badge">Published</span>
+                    </div>
+                    <h3>Resource Allocation in MEC-NOMA Networks</h3>
+                    <p>Deep reinforcement learning framework optimising computation offloading for energy-harvesting IoT devices. A DDPG agent dynamically balances time-sharing between data transmission and energy harvesting, minimising service delay and converging faster than baseline methods. Published at IEEE WCNC 2024.</p>
+                    <div class="project-tech">
+                        <span class="tech-tag">Python</span>
+                        <span class="tech-tag">TensorFlow</span>
+                        <span class="tech-tag">Deep RL</span>
+                        <span class="tech-tag">DDPG</span>
+                    </div>
+                    <div class="project-links">
+                        <a href="https://scholar.google.com/citations?view_op=view_citation&amp;hl=en&amp;user=3DpcXZMAAAAJ&amp;citation_for_view=3DpcXZMAAAAJ:u-x6o8ySG0sC" target="_blank" rel="noopener"><span aria-hidden="true">&#128196;</span> Paper</a>
+                        <a href="https://drive.google.com/file/d/19qaJNK0aULf1YAteoijH-xRYKmC_4Z6A/view" target="_blank" rel="noopener"><span aria-hidden="true">&#127909;</span> Demo</a>
+                        <a href="https://github.com/msarmadsohail/wcnc-2024-mec-noma" target="_blank" rel="noopener"><span aria-hidden="true">&#128187;</span> Code</a>
+                        <a href="https://www.linkedin.com/posts/msarmadsohail_projectcompletion-teamwork-thankyou-activity-7188945182602522626-d8WP" target="_blank" rel="noopener"><span aria-hidden="true">&#128202;</span> Poster</a>
+                    </div>
+                </div>
+
+                <!-- 7. AI Construction Damage Analyzer -->
+                <div class="project-card">
+                    <div class="project-glow"></div>
+                    <div class="project-header">
+                        <span class="project-badge">Computer Vision</span>
+                    </div>
+                    <h3>AI Construction Damage Analyzer</h3>
+                    <p>Vision-based chatbot for analyzing construction damage images using multimodal AI. Deployed as interactive Gradio application for real-time assessment.</p>
+                    <div class="project-tech">
+                        <span class="tech-tag">Vision Models</span>
+                        <span class="tech-tag">LLM</span>
+                        <span class="tech-tag">Gradio</span>
+                    </div>
+                    <div class="project-links">
+                        <a href="https://github.com/msarmadsohail/pak-angels-genai-cohort6" target="_blank" rel="noopener"><span aria-hidden="true">&#128187;</span> Code</a>
+                    </div>
+                </div>
+
+                <!-- 8. RAG System with Groq & FAISS -->
+                <div class="project-card">
+                    <div class="project-glow"></div>
+                    <div class="project-header">
+                        <span class="project-badge">GenAI</span>
+                    </div>
+                    <h3>RAG System with Groq & FAISS</h3>
+                    <p>Retrieval-Augmented Generation system using Groq LLM and FAISS vector database for efficient document querying and context-aware responses.</p>
+                    <div class="project-tech">
+                        <span class="tech-tag">LangChain</span>
+                        <span class="tech-tag">Groq</span>
+                        <span class="tech-tag">FAISS</span>
+                        <span class="tech-tag">Gradio</span>
+                    </div>
+                    <div class="project-links">
+                        <a href="https://github.com/msarmadsohail/pak-angels-genai-cohort6" target="_blank" rel="noopener"><span aria-hidden="true">&#128187;</span> Code</a>
+                    </div>
+                </div>
+
+                <!-- 9. Passive RFID Transponder Chip -->
+                <div class="project-card" data-m-order="5">
+                    <div class="project-glow"></div>
+                    <div class="project-header">
+                        <span class="project-badge">IC Design</span>
+                    </div>
+                    <h3>Passive RFID Transponder Chip</h3>
+                    <p>Ultra-low-power RFID transponder for animal tagging in CMOS 65nm, built as the project for a five-month analog and mixed-signal training programme at the NUST Chip Design Centre. Under 10&nbsp;&micro;W power consumption and a 10&nbsp;cm read range.</p>
+                    <div class="project-tech">
+                        <span class="tech-tag">Cadence Virtuoso</span>
+                        <span class="tech-tag">CMOS 65nm</span>
+                        <span class="tech-tag">RFID</span>
+                    </div>
+                    <div class="project-links">
+                        <span class="proprietary"><span aria-hidden="true">&#128274;</span> NCDC</span>
+                    </div>
+                </div>
+
+                <!-- 10. Autonomous AI Agent Demo -->
+                <div class="project-card">
+                    <div class="project-glow"></div>
+                    <div class="project-header">
+                        <span class="project-badge">AI Agents</span>
+                    </div>
+                    <h3>Autonomous AI Agent Demo</h3>
+                    <p>Multi-agent system demonstrating autonomous decision-making and task execution. Implements ReAct framework for reasoning and action.</p>
+                    <div class="project-tech">
+                        <span class="tech-tag">LangChain</span>
+                        <span class="tech-tag">Agents</span>
+                        <span class="tech-tag">Python</span>
+                    </div>
+                    <div class="project-links">
+                        <a href="https://github.com/msarmadsohail/pak-angels-genai-cohort6" target="_blank" rel="noopener"><span aria-hidden="true">&#128187;</span> Code</a>
+                    </div>
+                </div>
+
+                <!-- 11. 4-bit Microprocessor & VGA Controller -->
+                <div class="project-card">
+                    <div class="project-glow"></div>
+                    <div class="project-header">
+                        <span class="project-badge">Digital Design</span>
+                    </div>
+                    <h3>4-bit Microprocessor &amp; VGA Controller</h3>
+                    <p>Custom 4-bit microprocessor with a hierarchical datapath and control logic, plus VGA line-drawing algorithms implemented in Verilog for FPGA deployment.</p>
+                    <div class="project-tech">
+                        <span class="tech-tag">Verilog</span>
+                        <span class="tech-tag">FPGA</span>
+                        <span class="tech-tag">Digital Logic</span>
+                    </div>
+                    <div class="project-links">
+                        <span class="proprietary"><span aria-hidden="true">&#127891;</span> Academic</span>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+                </section>
+
+    <!-- Publications Section -->
+    <section id="publications">
+        <div class="container">
+            <div class="section-header">
+                <div class="section-badge">Research</div>
+                <h2 class="section-title">Publications</h2>
+                <p class="section-subtitle">Contributing to the advancement of AI and IoT systems</p>
+            </div>
+            
+            <div class="publication-showcase">
+                <div class="publication-card">
+                    <div class="publication-icon"><span aria-hidden="true">&#128196;</span></div>
+                    <div class="publication-content">
+                        <h3>Optimizing Resource Allocation in MEC-Enabled CR-NOMA-Assisted IoT Networks: A DRL-Driven Strategy</h3>
+                        <div class="publication-meta">
+                            <span class="venue">IEEE WCNC 2024</span>
+                            <span class="location">Dubai, UAE</span>
+                            <span class="date">May 2024</span>
+                        </div>
+                        <p class="authors">Muhammad Taha Qaiser, <strong>Muhammad Sarmad Sohail</strong>, Minahil Shafqat, Syed Asad Ullah, Haejoon Jung, Syed Ali Hassan</p>
+                        <p class="description">Proposed a Deep Deterministic Policy Gradient (DDPG) framework for optimizing resource allocation in energy-harvesting IoT devices using CR-NOMA and Mobile Edge Computing. Demonstrated superior performance over baseline methods with faster convergence.</p>
+                        <div class="publication-links">
+                            <a href="https://scholar.google.com/citations?view_op=view_citation&hl=en&user=3DpcXZMAAAAJ&citation_for_view=3DpcXZMAAAAJ:u-x6o8ySG0sC" target="_blank" rel="noopener">
+                                <span><span aria-hidden="true">&#128196;</span> Read Paper</span>
+                            </a>
+                            <a href="https://drive.google.com/file/d/19qaJNK0aULf1YAteoijH-xRYKmC_4Z6A/view" target="_blank" rel="noopener">
+                                <span><span aria-hidden="true">&#127909;</span> Watch Demo</span>
+                            </a>
+                            <a href="https://www.linkedin.com/posts/msarmadsohail_projectcompletion-teamwork-thankyou-activity-7188945182602522626-d8WP" target="_blank" rel="noopener">
+                                <span><span aria-hidden="true">&#128202;</span> View Poster</span>
+                            </a>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+
+    <!-- Contact Section -->
+    <section id="contact">
+        <div class="container">
+            <div class="section-header">
+                <div class="section-badge">Get In Touch</div>
+                <h2 class="section-title">Let's Work Together</h2>
+                <p class="section-subtitle">Open to collaborating on data science and ML projects</p>
+                <!-- <p class="section-subtitle">Interested in collaborating on data science or ML projects?<br>Open to discussing opportunities and working together on innovative solutions.</p> -->
+            </div>
+            
+            <div class="contact-content">
+                <div class="contact-left">
+                    <div class="contact-info">
+                        <div class="info-item">
+                            <span class="info-icon"><span aria-hidden="true">&#9993;&#65038;</span></span>
+                            <div>
+                                <a href="mailto:msarmadsohail@gmail.com">msarmadsohail@gmail.com</a>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                
+                <div class="contact-right">
+                    <!-- Brand marks are inline SVG rather than the ASCII stand-ins
+                         these used to be. GitHub/LinkedIn/Scholar are simple-icons
+                         (CC0); the envelope is Material Symbols (Apache 2.0). Inline
+                         because the site takes no third-party runtime dependency,
+                         and because a path inherits currentColor for free. -->
+                    <div class="social-grid">
+                        <!-- Phone only: the address itself is in .contact-left, which
+                             a phone hides in favour of this row of four. -->
+                        <a href="mailto:msarmadsohail@gmail.com" class="social-card social-card-mail">
+                            <div class="social-icon"><svg class="social-svg" viewBox="0 0 24 24" role="img" aria-hidden="true" focusable="false"><path d="M20 4H4c-1.1 0-1.99.9-1.99 2L2 18c0 1.1.9 2 2 2h16c1.1 0 2-.9 2-2V6c0-1.1-.9-2-2-2zm0 4l-8 5-8-5V6l8 5 8-5v2z"/></svg></div>
+                            <div class="social-handle">Email</div>
+                        </a>
+                        <a href="https://linkedin.com/in/msarmadsohail" target="_blank" rel="noopener" class="social-card">
+                            <div class="social-icon"><svg class="social-svg" viewBox="0 0 24 24" role="img" aria-hidden="true" focusable="false"><path d="M20.447 20.452h-3.554v-5.569c0-1.328-.027-3.037-1.852-3.037-1.853 0-2.136 1.445-2.136 2.939v5.667H9.351V9h3.414v1.561h.046c.477-.9 1.637-1.85 3.37-1.85 3.601 0 4.267 2.37 4.267 5.455v6.286zM5.337 7.433c-1.144 0-2.063-.926-2.063-2.065 0-1.138.92-2.063 2.063-2.063 1.14 0 2.064.925 2.064 2.063 0 1.139-.925 2.065-2.064 2.065zm1.782 13.019H3.555V9h3.564v11.452zM22.225 0H1.771C.792 0 0 .774 0 1.729v20.542C0 23.227.792 24 1.771 24h20.451C23.2 24 24 23.227 24 22.271V1.729C24 .774 23.2 0 22.222 0h.003z"/></svg></div>
+                            <div class="social-handle">@msarmadsohail</div>
+                        </a>
+                        <a href="https://github.com/msarmadsohail" target="_blank" rel="noopener" class="social-card">
+                            <div class="social-icon"><svg class="social-svg" viewBox="0 0 24 24" role="img" aria-hidden="true" focusable="false"><path d="M12 .297c-6.63 0-12 5.373-12 12 0 5.303 3.438 9.8 8.205 11.385.6.113.82-.258.82-.577 0-.285-.01-1.04-.015-2.04-3.338.724-4.042-1.61-4.042-1.61C4.422 18.07 3.633 17.7 3.633 17.7c-1.087-.744.084-.729.084-.729 1.205.084 1.838 1.236 1.838 1.236 1.07 1.835 2.809 1.305 3.495.998.108-.776.417-1.305.76-1.605-2.665-.3-5.466-1.332-5.466-5.93 0-1.31.465-2.38 1.235-3.22-.135-.303-.54-1.523.105-3.176 0 0 1.005-.322 3.3 1.23.96-.267 1.98-.399 3-.405 1.02.006 2.04.138 3 .405 2.28-1.552 3.285-1.23 3.285-1.23.645 1.653.24 2.873.12 3.176.765.84 1.23 1.91 1.23 3.22 0 4.61-2.805 5.625-5.475 5.92.42.36.81 1.096.81 2.22 0 1.606-.015 2.896-.015 3.286 0 .315.21.69.825.57C20.565 22.092 24 17.592 24 12.297c0-6.627-5.373-12-12-12"/></svg></div>
+                            <div class="social-handle">@msarmadsohail</div>
+                        </a>
+                        <a href="https://scholar.google.com/citations?user=3DpcXZMAAAAJ" target="_blank" rel="noopener" class="social-card">
+                            <div class="social-icon"><svg class="social-svg" viewBox="0 0 24 24" role="img" aria-hidden="true" focusable="false"><path d="M5.242 13.769L0 9.5 12 0l12 9.5-5.242 4.269C17.548 11.249 14.978 9.5 12 9.5c-2.977 0-5.548 1.748-6.758 4.269zM12 10a7 7 0 1 0 0 14 7 7 0 0 0 0-14z"/></svg></div>
+                            <div class="social-handle">Publications</div>
+                        </a>
+                        <!-- Hidden on a phone: the quick-action bar already carries it. -->
+                        <a href="assets/M_SARMAD_SOHAIL_CV.pdf" target="_blank" rel="noopener" class="social-card social-card-resume" data-resume-trigger>
+                            <div class="social-icon"><span aria-hidden="true">&#128196;</span></div>
+                            <div class="social-handle">Resume</div>
+                        </a>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Résumé viewer. Both résumé links above keep their real PDF href, so
+         they still work as a plain new-tab open with JS disabled, a middle
+         click, or a screen reader; a plain left click opens this instead. -->
+    <div class="resume-modal" id="resume-modal" aria-hidden="true">
+        <div class="resume-modal-backdrop" data-resume-close></div>
+        <div class="resume-modal-panel" role="dialog" aria-modal="true" aria-labelledby="resume-modal-title">
+            <div class="resume-modal-bar">
+                <span id="resume-modal-title">Résumé</span>
+                <div class="resume-modal-actions">
+                    <a class="resume-modal-btn" href="assets/M_SARMAD_SOHAIL_CV.pdf" download="M_Sarmad_Sohail_CV.pdf">
+                        <span aria-hidden="true">&#11015;</span> Download
+                    </a>
+                    <button type="button" class="resume-modal-btn" data-resume-print>
+                        <span aria-hidden="true">&#128424;</span> Print
+                    </button>
+                    <button type="button" class="resume-modal-btn resume-modal-close" data-resume-close aria-label="Close résumé viewer">
+                        <span aria-hidden="true">&#10005;</span>
+                    </button>
+                </div>
+            </div>
+            <!-- Pages are rendered here as <canvas> by PDF.js (js/main.js),
+                 not shown via a raw <iframe> to a PDF - a plugin-embedded PDF
+                 renders differently (or not at all) across mobile browsers,
+                 which defeats the point of a viewer meant to look the same
+                 everywhere. Falls back to an iframe only if rendering fails. -->
+            <div class="resume-modal-body" id="resume-modal-body"></div>
+        </div>
+    </div>
+
+    <!-- Footer -->
+    <footer>
+        <div class="container">
+            <p>&copy; <span data-current-year>2026</span> Muhammad Sarmad Sohail.<span class="m-trim"> Built with passion for data and AI.</span></p>
+        </div>
+    </footer>
+
+    <!-- JavaScript. No third-party dependency any more, so a CDN outage
+         cannot stop the nav or the reveals from working. -->
+    <script defer src="js/main.js"></script>
+</body>
+</html>

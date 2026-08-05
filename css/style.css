@@ -2267,6 +2267,24 @@ html {
    anyone printing the page gets the whole thing, and nothing here changes
    what the desktop layout shows.
    ------------------------------------------------------------------------- */
+
+/* js/main.js injects these controls at every width, because testing the width
+   once at load left a phone rotated to landscape showing bare unstyled buttons,
+   and a phone loaded in landscape with no phone layout at all. Visibility is
+   decided here instead - something the browser re-evaluates on rotation for
+   free, with no teardown logic to get wrong.
+
+   Deliberately outside the media query below, and the only new selector in this
+   change that a desktop ever matches: without it the injected button renders
+   completely unstyled above 768px, which is the bug it exists to fix. The
+   folding classes need no equivalent - `.m-collapsed` and `.m-curated` are only
+   ever read inside phone media queries, so above 768px they already mean
+   nothing and the full content shows by itself. */
+.m-toggle,
+.m-quickbar {
+    display: none;
+}
+
 @media (max-width: 768px) {
     [data-m-collapse].m-collapsed {
         display: none;

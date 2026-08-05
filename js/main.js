@@ -774,8 +774,8 @@ if (profileCard) {
 
 
 /* -------------------------------------------------------------------------
-   Hero profile card tilt - phones only
-   Desktop keeps the existing :hover tilt (now scoped to (hover: hover) in
+   Hero profile card tilt - touch devices
+   Desktop keeps the existing :hover tilt (scoped to (hover: hover) in
    css/style.css, since a touchscreen firing :hover on tap would otherwise
    fight with this).
 
@@ -787,71 +787,195 @@ if (profileCard) {
    method's mere existence, not a UA string) gets a touch-drag tilt instead;
    everything else gets the real sensor, silently, permission dialog never
    shown to anyone regardless of platform.
+
+   The tunables in `cfg` below are a starting point, not measured values. They
+   are tuned on a real phone with tools/gyro-tune.py, which injects a slider
+   overlay without that overlay ever entering src/. Numbers picked at a desk
+   are guesses wearing decimal points.
    ------------------------------------------------------------------------- */
 (() => {
     const card = document.querySelector('.profile-card');
     const inner = document.querySelector('.profile-inner');
     if (!card || !inner) return;
 
-    if (!window.matchMedia('(max-width: 768px)').matches) return;
+    /* Gated on hover capability, not viewport width. A phone turned to
+       landscape is still a phone, but the old test was `max-width: 768px`
+       evaluated once at load - so a phone that started in landscape, or was
+       rotated into it, got no tilt at all: this module had bailed, and the
+       desktop :hover tilt it fell back to is itself scoped to (hover: hover),
+       which a touchscreen never matches. Capability does not change when a
+       device is rotated, so that gap cannot reopen.
+
+       This also keeps hybrid laptops on the desktop behaviour, which is the
+       right call and matches how the CSS already scopes the :hover tilt. */
+    if (window.matchMedia('(hover: hover)').matches) return;
     if (window.matchMedia('(prefers-reduced-motion: reduce)').matches) return;
 
-    const MAX_DEG = 10;
-    const clamp = (v) => Math.max(-MAX_DEG, Math.min(MAX_DEG, v));
     const apply = (rx, ry) => {
         inner.style.transform = `rotateX(${rx}deg) rotateY(${ry}deg)`;
+    };
+    const clamp = (v, max) => Math.max(-max, Math.min(max, v));
+
+    /* Independent per axis on purpose. Roll - holding the phone and turning it
+       left or right - is a deliberate gesture, and reads as one. Pitch swings
+       20-30 degrees from nothing more than normal reading posture and thumb
+       scrolling, so the equal 0.4 on both axes that shipped made the card
+       pitch constantly for reasons unrelated to intent. That is why the
+       vertical axis felt wrong while the horizontal one felt fine: it was not
+       responding to anything the visitor meant to do. */
+    const cfg = {
+        rollMult: 0.5,
+        rollMax: 15,
+        pitchMult: 0.15,
+        pitchMax: 5,
+        /* Bleed of the reference angle toward the current one, per frame.
+           The baseline used to latch on the first reading and never move, so a
+           page that loaded while the phone was on its way out of a pocket left
+           the card skewed for the entire session with no way back.
+
+           0.001 is roughly a 17-second recovery. The figure first proposed was
+           0.01, and it is wrong: at 1% per frame a held tilt washes back to
+           neutral in under two seconds, which quietly converts a
+           position-sensitive effect into a velocity-sensitive one. Slow enough
+           to be invisible, fast enough to undo a bad calibration. */
+        drift: 0.001,
+        /* Sensor readings are too jittery to apply raw - ease toward the
+           target rather than snapping to it. */
+        ease: 0.15,
     };
 
     const needsIOSPermission = typeof DeviceOrientationEvent !== 'undefined'
         && typeof DeviceOrientationEvent.requestPermission === 'function';
 
-    if (typeof DeviceOrientationEvent !== 'undefined' && !needsIOSPermission) {
-        // Calibrated to whatever angle the phone happens to be held at when
-        // the first reading arrives, not an assumed "flat" or "upright" -
-        // tilt is relative to that, not an absolute sensor value.
-        let baseBeta = null;
-        let baseGamma = null;
-        let smoothX = 0;
-        let smoothY = 0;
-
-        window.addEventListener('deviceorientation', (e) => {
-            if (e.beta === null || e.gamma === null) return;
-            if (baseBeta === null) {
-                baseBeta = e.beta;
-                baseGamma = e.gamma;
-            }
-            const targetX = clamp((e.beta - baseBeta) * -0.4);
-            const targetY = clamp((e.gamma - baseGamma) * 0.4);
-            // Sensor noise is too jittery to apply directly - ease toward the
-            // target instead of snapping to it on every reading.
-            smoothX += (targetX - smoothX) * 0.15;
-            smoothY += (targetY - smoothY) * 0.15;
-            inner.style.transition = 'none';
-            apply(smoothX, smoothY);
-        });
-    } else {
-        // iOS, or any other browser gating orientation behind a permission
-        // prompt: the card tilts with the finger dragging across it instead.
+    // iOS, or any other browser gating orientation behind a permission prompt:
+    // the card tilts with the finger dragging across it instead. Also the
+    // fallback when a sensor exists on paper but never actually reports.
+    let touchDragOn = false;
+    const enableTouchDrag = () => {
+        if (touchDragOn) return;
+        touchDragOn = true;
+        const TOUCH_MAX = 10;
         const reset = () => {
             inner.style.transition = 'transform 0.6s';
             apply(0, 0);
         };
-
         card.addEventListener('touchstart', () => {
             inner.style.transition = 'none';
         }, { passive: true });
-
         card.addEventListener('touchmove', (e) => {
             const touch = e.touches[0];
             const rect = card.getBoundingClientRect();
             const x = (touch.clientX - rect.left) / rect.width - 0.5;
             const y = (touch.clientY - rect.top) / rect.height - 0.5;
-            apply(clamp(y * -MAX_DEG * 2), clamp(x * MAX_DEG * 2));
+            apply(clamp(y * -TOUCH_MAX * 2, TOUCH_MAX),
+                  clamp(x * TOUCH_MAX * 2, TOUCH_MAX));
         }, { passive: true });
-
         card.addEventListener('touchend', reset);
         card.addEventListener('touchcancel', reset);
+    };
+
+    if (typeof DeviceOrientationEvent === 'undefined' || needsIOSPermission) {
+        enableTouchDrag();
+        return;
     }
+
+    let rawBeta = null;
+    let rawGamma = null;
+    let baseBeta = 0;
+    let baseGamma = 0;
+    let smoothX = 0;
+    let smoothY = 0;
+    let targetX = 0;
+    let targetY = 0;
+    let raf = null;
+    let sawReading = false;
+
+    // screen.orientation is unavailable on older Safari, where the deprecated
+    // window.orientation is the only source. Either can be absent; 0 is the
+    // right answer when neither exists, because a device that cannot report a
+    // rotation cannot be rotated as far as the page is concerned.
+    const screenAngle = () => {
+        const a = (screen.orientation && typeof screen.orientation.angle === 'number')
+            ? screen.orientation.angle
+            : (typeof window.orientation === 'number' ? window.orientation : 0);
+        return ((a % 360) + 360) % 360;
+    };
+
+    const frame = () => {
+        if (rawBeta !== null) {
+            baseBeta += (rawBeta - baseBeta) * cfg.drift;
+            baseGamma += (rawGamma - baseGamma) * cfg.drift;
+
+            /* beta and gamma are reported against the DEVICE, not the screen.
+               Turn the phone to landscape and the two swap roles, so the
+               effect was driving the wrong axis there - silently, because
+               nothing errors and the card still moves. Rotating the tilt
+               vector by the screen angle puts it back into the frame the
+               visitor is actually looking at. */
+            const rad = screenAngle() * Math.PI / 180;
+            const cos = Math.cos(rad);
+            const sin = Math.sin(rad);
+            const dBeta = rawBeta - baseBeta;
+            const dGamma = rawGamma - baseGamma;
+            const roll = dGamma * cos + dBeta * sin;
+            const pitch = dBeta * cos - dGamma * sin;
+
+            targetY = clamp(roll * cfg.rollMult, cfg.rollMax);
+            targetX = clamp(pitch * -cfg.pitchMult, cfg.pitchMax);
+        }
+        smoothX += (targetX - smoothX) * cfg.ease;
+        smoothY += (targetY - smoothY) * cfg.ease;
+        apply(smoothX, smoothY);
+        raf = requestAnimationFrame(frame);
+    };
+
+    /* Driven by rAF rather than by the sensor tick, which is what the previous
+       version did. Two reasons, and the second is the real one: Android sensor
+       rates vary from about 30 to 120 Hz across devices, so easing and drift
+       applied per reading meant both the smoothing and the recovery time were
+       different on different phones for no visible reason. Per frame, they are
+       the same everywhere. */
+    const start = () => { if (raf === null) raf = requestAnimationFrame(frame); };
+    const stop = () => {
+        if (raf !== null) { cancelAnimationFrame(raf); raf = null; }
+    };
+
+    // A sensor can exist and never report: motion permission switched off in
+    // Android settings, or hardware that simply has no gyroscope. That used to
+    // leave the card completely dead with no fallback.
+    const fallbackTimer = setTimeout(() => {
+        if (!sawReading) enableTouchDrag();
+    }, 1000);
+
+    window.addEventListener('deviceorientation', (e) => {
+        if (e.beta === null || e.gamma === null) return;
+        if (!sawReading) {
+            sawReading = true;
+            clearTimeout(fallbackTimer);
+            // Calibrated to whatever angle the phone happens to be held at
+            // when the first reading arrives, not an assumed "flat" or
+            // "upright". A hardcoded resting angle would be actively worse for
+            // anyone reading in bed or with the phone flat on a desk.
+            baseBeta = e.beta;
+            baseGamma = e.gamma;
+            inner.style.transition = 'none';
+            start();
+        }
+        rawBeta = e.beta;
+        rawGamma = e.gamma;
+    });
+
+    // A requestAnimationFrame loop that never stops is a battery cost on the
+    // device least able to afford it. Browsers throttle rAF in background tabs
+    // but do not all stop it.
+    document.addEventListener('visibilitychange', () => {
+        if (document.hidden) stop();
+        else if (sawReading) start();
+    });
+
+    // Read by tools/gyro-tune.py, which is a local-only harness - it is never
+    // deployed, and nothing in the shipped site reads this back.
+    window.__gyroCfg = cfg;
 })();
 
 
@@ -869,8 +993,21 @@ if (profileCard) {
    outright: a failure here has to fail open.
    ------------------------------------------------------------------------- */
 (() => {
-    if (!window.matchMedia('(max-width: 768px)').matches) return;
+    /* Mounted at every width, hidden above 768px by CSS rather than by not
+       existing. The guard here used to be `max-width: 768px` tested once at
+       load, which was wrong in both directions:
 
+         load portrait  -> rotate landscape : buttons injected, their styling
+                                              gone with the media query - bare
+                                              unstyled controls on screen
+         load landscape -> rotate portrait  : this never ran at all - eleven
+                                              full project cards, no collapse,
+                                              no quick-action bar
+
+       Letting CSS decide visibility fixes all four load/rotate combinations
+       with no teardown logic to get wrong. The cost is a handful of
+       display:none elements in the desktop DOM, which are absent from the
+       accessibility tree and contribute nothing to layout. */
     let uid = 0;
     const makeToggle = (region, label, expandedLabel) => {
         const btn = document.createElement('button');
@@ -907,12 +1044,27 @@ if (profileCard) {
         makeToggle(region, label, label.replace(/^Show\b/, 'Hide'));
     });
 
-    // The ASCEND detail groups normally wait for the Job Intelligence Agent
-    // card to reach them (data-reveals-also), which is a two-column effect:
-    // the two sit side by side there. In one phone column JIA is three cards
-    // further down, so waiting for it would leave ASCEND's own tag row blank
-    // until the visitor had scrolled well past the card it belongs to.
-    document.querySelectorAll('.reveal-late').forEach(el => el.classList.add('is-visible'));
+    /* The ASCEND detail groups normally wait for the Job Intelligence Agent
+       card to reach them (data-reveals-also), which is a two-column effect:
+       the two sit side by side there. In one phone column JIA is three cards
+       further down, so waiting for it would leave ASCEND's own tag row blank
+       until the visitor had scrolled well past the card it belongs to.
+
+       This one genuinely is phone-only - it changes what the desktop reveal
+       machinery does, not just what is visible - so it stays behind a width
+       test, and re-runs when the width changes so a phone that started in
+       landscape gets it on rotating back.
+
+       Applied, never undone. Once something has been revealed, re-hiding it on
+       a width change is a flash of vanishing content, and the desktop reveal
+       it would restore has already been passed. */
+    const phone = window.matchMedia('(max-width: 768px)');
+    const revealLate = () => {
+        if (!phone.matches) return;
+        document.querySelectorAll('.reveal-late').forEach(el => el.classList.add('is-visible'));
+    };
+    revealLate();
+    phone.addEventListener('change', revealLate);
 
     const grid = document.querySelector('.projects-grid');
     if (!grid) return;
@@ -983,8 +1135,10 @@ if (profileCard) {
    and not others.
    ------------------------------------------------------------------------- */
 (() => {
-    if (!window.matchMedia('(max-width: 768px)').matches) return;
-
+    // Mounted at every width, for the reasons given on the expand/collapse
+    // module above. This one is safe at any width regardless: it only ever
+    // adds classes that are styled inside the phone media query, and the
+    // rows it watches scroll horizontally on a desktop too.
     const rows = [...document.querySelectorAll('.project-tech, .tech-items')];
     if (!rows.length) return;
 
@@ -1025,7 +1179,10 @@ if (profileCard) {
    screen readers and crawlers whether or not the bar is ever shown.
    ------------------------------------------------------------------------- */
 (() => {
-    if (!window.matchMedia('(max-width: 768px)').matches) return;
+    // Mounted at every width, for the reasons given on the expand/collapse
+    // module above. `.m-quickbar` is display:none outside the phone media
+    // query, so on a desktop this is an empty div with two unreachable links
+    // in it - no layout, no tab stops, nothing in the accessibility tree.
     const hero = document.getElementById('hero');
     const resumeLink = document.querySelector('[data-resume-trigger]');
     if (!hero || !resumeLink) return;
@@ -1059,4 +1216,113 @@ if (profileCard) {
         document.body.classList.toggle('m-quickbar-on', !entry.isIntersecting);
     }, { threshold: 0, rootMargin: '-40% 0px 0px 0px' });
     io.observe(hero);
+})();
+
+/* -------------------------------------------------------------------------
+   Beacon.
+
+   Deliberately boring. It posts an event name, a path, and at most one number
+   to one endpoint. Everything worth knowing - where the visitor is, which
+   network and organisation they are on, what device, which browser - is worked
+   out at the other end from headers the browser sends anyway. So reading this
+   in DevTools tells you the site counts pageviews, and nothing else. That is
+   the whole design; there is no clever half hidden here to find.
+
+   Adds no elements and no styles, so it cannot move the page by construction.
+   ------------------------------------------------------------------------- */
+(() => {
+    // Filled in after the Worker is deployed. Empty means every function below
+    // returns immediately - the site runs exactly as it did before.
+    const ENDPOINT = 'https://portfolio-visits.msarmadsohail.workers.dev/api/e';
+    if (!ENDPOINT) return;
+
+    // Own-visit opt-out. Without it the most frequent visitor by a wide margin
+    // is whoever is building the site. Visit once with ?notrack=1 per browser.
+    try {
+        if (/[?&]notrack=1/.test(location.search)) localStorage.setItem('nt', '1');
+        if (localStorage.getItem('nt') === '1') return;
+    } catch (e) { /* private mode: fall through and just track */ }
+
+    const send = (payload) => {
+        const body = JSON.stringify(payload);
+        try {
+            // sendBeacon is the only thing that reliably survives a page being
+            // closed, which is exactly when the engagement events fire.
+            if (navigator.sendBeacon) {
+                navigator.sendBeacon(ENDPOINT, new Blob([body], { type: 'application/json' }));
+                return;
+            }
+            fetch(ENDPOINT, {
+                method: 'POST', body, keepalive: true,
+                headers: { 'Content-Type': 'application/json' }
+            }).catch(() => {});
+        } catch (e) { /* never let telemetry break the page */ }
+    };
+
+    const path = () => location.pathname + location.search;
+
+    send({ e: 'pageview', p: path(), r: document.referrer });
+
+    /* Which link was taken. A closed set of short keys - the point is "they went
+       for the CV", not a URL log. */
+    const keyFor = (a) => {
+        if (a.hasAttribute('download')) return 'resume-download';
+        if (a.hasAttribute('data-resume-trigger')) return 'resume-view';
+        const href = a.getAttribute('href') || '';
+        if (href.startsWith('mailto:')) return 'email';
+        let host = '';
+        try { host = new URL(a.href, location.href).host.replace(/^www\./, ''); } catch (e) { return ''; }
+        if (!host || host === location.host) return '';
+        if (host === 'github.com') return href.split('/').length > 4 ? 'github-repo' : 'github-profile';
+        if (host.endsWith('linkedin.com')) return 'linkedin';
+        if (host.startsWith('scholar.google')) return 'scholar';
+        if (host === 'drive.google.com') return 'drive';
+        return 'outbound';
+    };
+
+    // Capture phase, passive, and never preventDefault - the résumé modal and
+    // the smooth-scroll handlers keep their behaviour untouched.
+    document.addEventListener('click', (ev) => {
+        const t = ev.target.closest('[data-resume-print]');
+        if (t) { send({ e: 'click', p: path(), t: 'resume-print' }); return; }
+        const a = ev.target.closest('a[href]');
+        if (!a) return;
+        const k = keyFor(a);
+        if (k) send({ e: 'click', p: path(), t: k });
+    }, { capture: true, passive: true });
+
+    /* How far down, and how long. Both are read off variables already being
+       maintained and reported once, on the way out - not streamed while the
+       visitor scrolls, which would be several hundred writes for one reader. */
+    let deepest = 0;
+    const measure = () => {
+        const reach = window.scrollY + window.innerHeight;
+        const full = document.documentElement.scrollHeight;
+        if (full > 0) deepest = Math.max(deepest, Math.min(100, Math.round((reach / full) * 100)));
+    };
+    measure();
+    window.addEventListener('scroll', measure, { passive: true });
+
+    let visibleMs = 0;
+    let since = document.visibilityState === 'visible' ? Date.now() : 0;
+    document.addEventListener('visibilitychange', () => {
+        if (document.visibilityState === 'visible') { since = Date.now(); return; }
+        if (since) { visibleMs += Date.now() - since; since = 0; }
+    });
+
+    let reported = false;
+    const report = () => {
+        if (reported) return;
+        reported = true;
+        if (since) visibleMs += Date.now() - since;
+        const bucket = deepest >= 100 ? 100 : deepest >= 75 ? 75 : deepest >= 50 ? 50 : deepest >= 25 ? 25 : 0;
+        const p = path();
+        send({ e: 'engagement', p, t: 'scroll', v: bucket });
+        send({ e: 'engagement', p, t: 'time', v: Math.round(visibleMs / 1000) });
+    };
+    // pagehide is the reliable one; iOS Safari often never fires unload at all.
+    window.addEventListener('pagehide', report);
+    document.addEventListener('visibilitychange', () => {
+        if (document.visibilityState === 'hidden') report();
+    });
 })();

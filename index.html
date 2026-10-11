@@ -190,6 +190,7 @@
                             <span class="tech-item">PySpark</span>
                             <span class="tech-item">Snowflake</span>
                             <span class="tech-item">PostgreSQL</span>
+                            <span class="tech-item">Neo4j</span>
                             <span class="tech-item">SQL</span>
                             <span class="tech-item">ETL Pipelines</span>
                             <span class="tech-item">FastAPI</span>
@@ -213,6 +214,7 @@
                         <div class="tech-items">
                             <span class="tech-item">RAG</span>
                             <span class="tech-item">LangChain</span>
+                            <span class="tech-item">Claude Agent SDK</span>
                             <span class="tech-item">PydanticAI</span>
                             <span class="tech-item">FAISS</span>
                             <span class="tech-item">Embeddings</span>
@@ -245,30 +247,34 @@
                         <span class="project-badge">Synthetic Data Generation</span>
                     </div>
                     <h3>ASCEND Synthetic Data Platform</h3>
-                    <p>A platform that produces synthetic data for testing, development and analytics, from single flat files up to entire relational databases, without exposing real records. My work spans three connected tracks: the production data modules, the rule-based generation engine, and research on deep generative models.
+                    <p>A platform that produces synthetic data for testing, development and analytics, from single flat files up to entire relational databases, without exposing real records. My work spans four connected tracks: the production data modules, the rule-based generation engine, research on deep generative models, and the agentic systems above them.
                     <div class="project-groups" data-m-collapse="Show breakdown">
                       <div class="pg"><h4>Platform &amp; data modules</h4><ul>
-                        <li>Developed production-grade <strong>Python</strong> and <strong>FastAPI</strong> microservices for statistical analysis, preprocessing, data profiling, feature engineering, anonymization, curation, and synthetic data generation.</li>
+                        <li>Developed production-grade <strong>Python</strong> and <strong>FastAPI</strong> microservices for statistical analysis, preprocessing, data profiling, feature engineering, anonymization, curation and generation, as distributed <strong>PySpark</strong> ETL jobs.</li>
                         <li>Built synthetic data generation module for relational databases sourced from <strong>PostgreSQL</strong> or <strong>Snowflake</strong>, producing privacy-safe versions of complete multi-table schemas or generating them later from extracted data signatures.</li>
-                        <li>Implemented these capabilities as distributed <strong>PySpark</strong> jobs, orchestrating end-to-end ingestion, profiling, transformation, and generation workloads.</li>
                       </ul></div>
                       <div class="pg reveal-late"><h4>Rule-based generation engine</h4><ul>
                         <li>Built the platform's <strong>rule-based generation engine</strong>, layering configurable business logic over statistical generation through conditional rules within tables and cross-table rules across related data.</li>
                         <li>Implemented composite foreign-key resolution with per-parent cardinality defined as exact counts, ranges, or weighted distributions, keeping child records consistent with their corresponding count fields.</li>
-                        <li>Developed the downstream <strong>Payload Expert</strong> tool to assemble nested API payloads from source-agnostic flat generated tables and produce deliberately malformed variants with required fields dropped, wrong types and invalid enums, for negative testing of a consumer API.</li>
+                        <li>Developed the downstream <strong>Payload Expert</strong> tool, assembling nested API payloads from flat generated tables and producing deliberately malformed variants for negative testing of a consumer API.</li>
                       </ul></div>
                       <div class="pg reveal-late"><h4>Enhanced synthetic data generation</h4><ul>
-                        <li>Built and evaluated tabular <strong>synthetic data generators</strong> across three model families: <strong>GAN</strong>, <strong>autoregressive</strong>, and <strong>cVAE</strong>, for fraud detection on financial, insurance, and medical datasets under severe class imbalance.</li>
-                        <li>Optimized model performance through <strong>Optuna</strong>-driven hyperparameter sweeps, <strong>MLflow</strong> experiment tracking, and GPU-based training on <strong>AWS</strong> instances.</li>
-                        <li>Raised synthetic fidelity on a key transaction behaviour to <strong>98.78%</strong> (98.96% for real data) by correcting the training feature set.</li>
+                        <li>Built and evaluated tabular <strong>synthetic data generators</strong> across three model families &mdash; <strong>GAN</strong>, <strong>autoregressive</strong>, <strong>cVAE</strong> &mdash; for fraud detection on financial, insurance and medical datasets under severe class imbalance, tuned with <strong>Optuna</strong>, tracked in <strong>MLflow</strong>, trained on <strong>AWS</strong> GPUs.</li>
+                        <li>Raised synthetic fidelity on a key transaction behaviour to <strong>98.96%</strong> (98.78% for real data).</li>
+                      </ul></div>
+                      <div class="pg reveal-late"><h4>Agentic systems</h4><ul>
+                        <li>Built a <strong>multi-agent service</strong> on the <strong>Claude Agent SDK</strong> that turns a SQL schema and a plain-language request into a data-generation script, with separate generator and reviewer agents reviewing the output.</li>
+                        <li>Built a <strong>database discovery service</strong> that profiles a live database into a shared intermediate representation and records the mined business rules in a <strong>Neo4j</strong> registry, vector-searchable through a standalone embedding service.</li>
                       </ul></div>
                     </div></p>
                     <div class="project-tech reveal-late">
                         <span class="tech-tag">Python</span>
                         <span class="tech-tag">FastAPI</span>
+                        <span class="tech-tag">Claude Agent SDK</span>
                         <span class="tech-tag">PySpark</span>
                         <span class="tech-tag">PostgreSQL</span>
                         <span class="tech-tag">Snowflake</span>
+                        <span class="tech-tag">Neo4j</span>
                         <span class="tech-tag">SQL</span>
                         <span class="tech-tag">GANs</span>
                         <span class="tech-tag">cVAE</span>
@@ -278,9 +284,6 @@
                         <span class="tech-tag">AWS</span>
                         <span class="tech-tag">Docker</span>
                         <span class="tech-tag">Kubernetes</span>
-                    </div>
-                    <div class="project-links">
-                        <span class="proprietary"><span aria-hidden="true">&#128274;</span> Proprietary</span>
                     </div>
                 </div>
 
